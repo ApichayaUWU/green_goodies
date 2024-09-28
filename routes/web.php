@@ -12,12 +12,21 @@ Route::get('/home', function () {
     return view('home');
 })->middleware(['auth', 'verified'])->name('home');
 
+Route::resource('products', ProductController::class);
+
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
-    Route::get('/products', [ProductController::class, ''])->name('products.index');
+    // route to /products show for users
+    Route::get('/products', [ProductController::class, 'show'])->name('products.index');
+    // admin only
+    Route::get('/products/create', [ProductController::class, 'form'])->name('products.form');
+    Route::post('/products/create', [ProductController::class, 'store'])->name('products.form');
+
+    Route::get('/products/{product}', [ProductController::class, 'show_detail'])->name('products.detail');
+
 });
 
 require __DIR__.'/auth.php';
