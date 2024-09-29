@@ -4,6 +4,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ProductController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\CartController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -29,6 +30,9 @@ Route::middleware('auth')->group(function () {
     Route::post('/products/create', [ProductController::class, 'store'])->name('products.form');
 
     Route::get('/products/{product}', [ProductController::class, 'show_detail'])->name('products.detail');
+
+    Route::post('/products/{product}', [CartController::class, 'addToCart'])->name('cart.add');
+
 
 });
 
