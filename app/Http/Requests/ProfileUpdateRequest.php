@@ -18,7 +18,9 @@ class ProfileUpdateRequest extends FormRequest
         return [
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'lowercase', 'email', 'max:255', Rule::unique(User::class)->ignore($this->user()->id)],
-            'birthdate' => ['required', 'date', 'before:today'],  // Add validation for birthdate
+            'PhoneNumber' => ['nullable', 'string', 'max:10'],
+            'birthday' => ['nullable', 'date', 'before:today'],  // Add validation for birthdate
+            // 'profile_photo' => ['required', 'image', 'mimes:jpeg,png,jpg,gif', 'max:2048'],  // Validation for profile photo
         ];
     }
 }

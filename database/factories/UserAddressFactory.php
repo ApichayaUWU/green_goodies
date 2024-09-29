@@ -26,8 +26,7 @@ class UserAddressFactory extends Factory
             'password' => bcrypt('password'), // You can also use Hash::make('password') if you prefer
             //'remember_token' => Str::random(10),
             // Add other attributes if you have them
-            'birthdate' => $this->faker->date(),
-            'profile_photo' => $this->faker->imageUrl(),
+            
         ];
     }
 }
