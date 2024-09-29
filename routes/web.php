@@ -30,8 +30,11 @@ Route::middleware('auth')->group(function () {
     Route::post('/products/create', [ProductController::class, 'store'])->name('products.form');
 
     Route::get('/products/{product}', [ProductController::class, 'show_detail'])->name('products.detail');
-
     Route::post('/products/{product}', [CartController::class, 'addToCart'])->name('cart.add');
+
+    Route::get('/cart', [CartController::class, 'showCart'])->name('cart.show');
+    Route::delete('/cart/{id}', [CartController::class, 'removeFromCart'])->name('cart.remove');
+
 
 
 });

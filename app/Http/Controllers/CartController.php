@@ -4,10 +4,40 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Cart;
+use App\Models\User;
 use App\Models\Product;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
+
 
 class CartController extends Controller
 {
+
+    public function showCart()
+    {
+        // Fetch cart items for the authenticated user
+        $cartItems = Cart::where('user_id', auth()->id())
+            ->with('product') // Eager load the product
+            ->get();
+        return view('cart.index', compact('cartItems'));
+    }
+
+    public function removeFromCart($id)
+    {
+        $cartItem = Cart::findOrFail($id);
+
+        // Ensure the user can only delete their own cart items
+        if ($cartItem->user_id !== auth()->id()) {
+            return back()->withErrors('Unauthorized action.');
+        }
+
+        $cartItem->delete();
+
+        return redirect()->route('cart.show')->with('success', 'Item removed from cart successfully!');
+    }
+
+
+
     public function addToCart(Request $request, $productId)
     {
         // Fetch product

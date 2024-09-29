@@ -16,5 +16,16 @@ class Cart extends Model
     'updated_at' => 'datetime',
     ];
 
-    
+    // Define the relationship to Product
+    public function product()
+    {
+        return $this->belongsTo(Product::class);
+    }
+
+    // You can also define the relationship to User if needed
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
 }
