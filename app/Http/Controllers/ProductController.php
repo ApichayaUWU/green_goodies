@@ -50,7 +50,7 @@ class ProductController extends Controller
     }
 
     // Store or update the product
-    public function update(Request $request)
+    public function store(Request $request)
     {
         // Validation rules
         $request->validate([
