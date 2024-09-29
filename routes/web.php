@@ -21,8 +21,8 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
-    Route::post('/profile/photo/update', [UserController::class,'updateProfilePhoto'])->name('profile.update');
-
+    Route::post('/profile/photo/update', [UserController::class, 'updateProfilePhoto'])->name('profile.photo.update');
+    
     // route to /products show for users
     Route::get('/products', [ProductController::class, 'show'])->name('products.index');
     // admin only
@@ -34,7 +34,6 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/cart', [CartController::class, 'showCart'])->name('cart.show');
     Route::delete('/cart/{id}', [CartController::class, 'removeFromCart'])->name('cart.remove');
-
 
 
 });

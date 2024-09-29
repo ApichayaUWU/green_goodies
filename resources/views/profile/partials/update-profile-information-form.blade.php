@@ -76,7 +76,7 @@
         </div>
     </form>
 
-    <form method="post" action="{{ route('profile.update') }}" enctype="multipart/form-data" class="mt-6 space-y-6">
+    <form method="post" action="{{ route('profile.photo.update') }}" enctype="multipart/form-data" class="mt-6 space-y-6">
         @csrf
         <div>
             <x-input-label for="profile_photo" :value="__('Profile Photo')" />
