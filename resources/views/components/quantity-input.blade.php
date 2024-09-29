@@ -1,7 +1,6 @@
+@props(['quantity' => 1]) <!-- Set default value as 1 -->
+
 <form class="max-w-xs mx-auto">
-    <label for="quantity-input" class="block mb-2 text-sm font-medium text-gray-900">
-        Choose quantity:
-    </label>
     <div class="relative flex items-center max-w-[8rem]">
         <!-- Decrement button -->
         <button type="button" id="decrement-button" data-input-counter-decrement="quantity-input" 
@@ -14,7 +13,7 @@
         <!-- Input field -->
         <input type="text" name="quantity" id="quantity-input" data-input-counter aria-describedby="helper-text-explanation"
             class="bg-white border-x-0 border-gray-300 h-11 text-center text-gray-900 text-sm focus:ring-blue-500 focus:border-blue-500 block w-full py-2.5"
-            value="1" required />
+            value="{{ $quantity }}" required />
 
         <!-- Increment button -->
         <button type="button" id="increment-button" data-input-counter-increment="quantity-input" 
