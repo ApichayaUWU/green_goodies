@@ -9,8 +9,7 @@
 
         <!-- Fonts -->
         <link rel="preconnect" href="https://fonts.bunny.net">
-       
-<link href="https://fonts.bunny.net/css?family=manjari:700" rel="stylesheet" />
+        <link href="https://fonts.bunny.net/css?family=manjari:700" rel="stylesheet" />
 
         <!-- Scripts -->
         @vite(['resources/css/app.css', 'resources/js/app.js'])
