@@ -1,10 +1,13 @@
 <?php
 
+use Illuminate\Support\Facades\Route;
+
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ProductController;
-use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\CartController;
+use App\Http\Controllers\UserAddressController;
+
 
 Route::get('/', function () {
     return view('welcome');
@@ -17,10 +20,12 @@ Route::get('/home', function () {
 Route::resource('products', ProductController::class);
 
 Route::middleware('auth')->group(function () {
+    // profile form
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
+    // profile photo of user
     Route::post('/profile/photo/update', [UserController::class, 'updateProfilePhoto'])->name('profile.photo.update');
     
     // route to /products show for users
@@ -29,13 +34,19 @@ Route::middleware('auth')->group(function () {
     Route::get('/products/create', [ProductController::class, 'form'])->name('products.form');
     Route::post('/products/create', [ProductController::class, 'store'])->name('products.form');
 
+    // detail of each product
     Route::get('/products/{product}', [ProductController::class, 'show_detail'])->name('products.detail');
     Route::post('/products/{product}', [CartController::class, 'addToCart'])->name('cart.add');
 
+    // user's cart
     Route::get('/cart', [CartController::class, 'showCart'])->name('cart.show');
     Route::delete('/cart/{id}', [CartController::class, 'removeFromCart'])->name('cart.remove');
 
-
+    // user address
+    Route::get('/profile/address', [UserAddressController::class, 'index'])->name('address.index');
+    Route::get('/profile/address/create', [UserAddressController::class, 'form'])->name('address.form');
+    Route::post('/profile/address', [UserAddressController::class, 'store'])->name('address.store');
+    Route::delete('/profile/address/{id}', [UserAddressController::class, 'destroy'])->name('address.destroy');
 });
 
 require __DIR__.'/auth.php';
