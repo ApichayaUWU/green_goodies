@@ -87,5 +87,33 @@
             </div>
         </footer>
     </div>
+    <!-- Include SweetAlert2 from CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <script>
+        // Check if the session has a success message
+        @if(session('success'))
+            Swal.fire({
+                title: 'Success!',
+                text: "{{ session('success') }}",
+                icon: 'success',
+                confirmButtonText: 'OK'
+            });
+        @endif
+    </script>
+    <script>
+        // Save scroll position before page reloads
+        window.addEventListener('beforeunload', function() {
+            localStorage.setItem('scrollPosition', window.scrollY);
+        });
+
+        // Restore scroll position after page loads
+        window.addEventListener('load', function() {
+            if (localStorage.getItem('scrollPosition') !== null) {
+                window.scrollTo(0, localStorage.getItem('scrollPosition'));
+                localStorage.removeItem('scrollPosition'); // Clean up after restoring
+            }
+        });
+    </script>
 </body>
 </html>

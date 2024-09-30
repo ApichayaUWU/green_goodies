@@ -31,18 +31,5 @@
         </div>
 
         
-    <!-- Include SweetAlert2 from CDN -->
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-
-<script>
-    // Check if the session has a success message
-    @if(session('success'))
-        Swal.fire({
-            title: 'Success!',
-            text: "{{ session('success') }}",
-            icon: 'success',
-            confirmButtonText: 'OK'
-        });
-    @endif
-    </script>
+    
 </x-app-layout>
