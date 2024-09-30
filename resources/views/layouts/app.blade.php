@@ -10,7 +10,12 @@
         <!-- Fonts -->
         <link rel="preconnect" href="https://fonts.bunny.net">
         <link href="https://fonts.bunny.net/css?family=manjari:700" rel="stylesheet" />
-
+        <style>
+        body {
+            background-color: white !important; 
+        
+        }
+    </style>
         <!-- Scripts -->
         @vite(['resources/css/app.css', 'resources/js/app.js'])
     </head>
