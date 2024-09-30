@@ -52,7 +52,7 @@ class User extends Authenticatable
     /**
      * Get the addresses for the user.
      */
-    public function addresses(): HasMany
+    public function address(): HasMany
     {
         return $this->hasMany(UserAddress::class, 'user_id');
     }

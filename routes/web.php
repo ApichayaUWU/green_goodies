@@ -7,15 +7,15 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\UserAddressController;
+use App\Http\Controllers\HomeController;
 
 
 Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/home', function () {
-    return view('home');
-})->middleware(['auth', 'verified'])->name('home');
+// Replace the old home route with this one
+Route::get('/home', [HomeController::class, 'index'])->middleware(['auth', 'verified'])->name('home');
 
 Route::resource('products', ProductController::class);
 
@@ -47,6 +47,10 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile/address/create', [UserAddressController::class, 'form'])->name('address.form');
     Route::post('/profile/address', [UserAddressController::class, 'store'])->name('address.store');
     Route::delete('/profile/address/{id}', [UserAddressController::class, 'destroy'])->name('address.destroy');
+
+    Route::get('/profile/address/{id}/edit', [UserAddressController::class, 'edit'])->name('address.edit');
+    Route::put('/profile/address/{id}', [UserAddressController::class, 'update'])->name('address.update');
+
 });
 
 require __DIR__.'/auth.php';

@@ -1,4 +1,5 @@
 <x-app-layout>
+
     <div class="bg-white">
         <svg width="180" height="75" viewBox="0 0 287 75" fill="none" xmlns="http://www.w3.org/2000/svg" class="m-6">
         <rect width="287" height="75" rx="37.5" fill="#53B637"/>
@@ -10,6 +11,7 @@
     <div>
         <div> 
             <div class="bg-white overflow-hidden shadow-sm">
+
                 <div class="p-6 text-gray-900">
                     @if($cartItems->isEmpty())
                         <p>Your cart is empty.</p>

@@ -11,6 +11,7 @@ use Illuminate\View\View;
 
 class UserAddressController extends Controller
 {
+    
     /**
      * Display the user's addresses form for editing or adding.
      */
@@ -28,8 +29,10 @@ class UserAddressController extends Controller
     /**
      * Display the user's addresses form for editing or adding.
      */
-    public function form(): View
+    public function form(Request $request): View
     {
+        if($request){
+
         $user = Auth::user();
         $addresses = $user->address; // Get all addresses for the current user
 
@@ -37,7 +40,41 @@ class UserAddressController extends Controller
             'user' => $user,
             'addresses' => $addresses,
         ]);
+        }   
     }
+
+    // for edit-address page
+    public function edit($id): View
+    {
+        $user = Auth::user();
+        $address = UserAddress::where('user_id', $user->id)->where('id', $id)->firstOrFail();
+
+        return view('profile.edit-address', [
+            'address' => $address,
+        ]);
+    }
+
+    public function update(Request $request, $id)
+    {
+        $user = $request->user();
+
+        // Validate the address input
+        $request->validate([
+            'address_line1' => 'required|string|max:255',
+            'address_line2' => 'nullable|string|max:255',
+            'city' => 'required|string|max:100',
+            'district' => 'required|string|max:100',
+            'sub_district' => 'required|string|max:100',
+        ]);
+
+        // Find the address and ensure it belongs to the user
+        $address = UserAddress::where('user_id', $user->id)->where('id', $id)->firstOrFail();
+        $address->update($request->all());
+
+        return Redirect::route('profile.edit')->with('status', 'address-updated');
+    }
+
+
 
     /**
      * Store or update addresses.
@@ -76,7 +113,7 @@ class UserAddressController extends Controller
             }
         }
 
-        return Redirect::route('address.index')->with('status', 'addresses-updated');
+        return Redirect::route('profile.edit')->with('status', 'addresses-updated');
     }
 
     /**
@@ -91,6 +128,6 @@ class UserAddressController extends Controller
             $address->delete();
         }
 
-        return Redirect::route('address.index')->with('status', 'address-deleted');
+        return Redirect::route('profile.edit')->with('status', 'address-deleted');
     }
 }
