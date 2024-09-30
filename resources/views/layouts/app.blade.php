@@ -36,33 +36,36 @@
             </main>
         </div>
 
-        <!-- Footer -->
-        <div>
-            <footer class="bg-[#FFFFFF] w-full py-6 flex justify-around items-center">
-                <!-- Logo and slogan -->
-                <div class="flex flex-col items-center" style="height: 30px;">
-                    <img src="{{ asset('storage/images/logo.png') }}" alt="Green Goodies Logo" >
+       <!-- Footer -->
+<div class="bg-[#EADAB3] w-full py-6">
+    <footer class="flex justify-center items-center">
+        <div class="max-w-7xl w-full px-4 flex justify-between items-center">
+            <!-- Logo and slogan -->
+            <div class="flex flex-col items-center">
+                <img src="{{ asset('storage/images/logo.png') }}" alt="Green Goodies Logo" style="height: 90px; width: auto;">
+            </div>
+
+            <!-- Contact info -->
+            <div class="flex flex-col text-left">
+                <p class="text-gray-800 font-semibold">Contact Us</p>
+                <p class="text-gray-600">
+                    Tel: 099-999-9999<br>
+                    Email: greengoodies@gmail.com
+                </p>
+            </div>
+
+            <!-- Social Media Icons -->
+            <div class="flex flex-col items-center">
+                <h2 class="text-gray-800 font-semibold">Social Media</h2>
+                <div class="flex space-x-4 mt-2">
+                    <img src="{{ asset('storage/images/socialmedia.png') }}" alt="Social Media Icons" style="height: 40px; width: auto;">
                 </div>
-                
-<!-- Contact info -->
-<div class="flex flex-col">
-    <p class="text-gray-800 font-semibold">Contact Us</p>
-    <p class="text-gray-600" style="padding-left: 30px;">
-        Tel: 099-999-9999<br>
-        Email: greengoodies@gmail.com
-    </p>
+            </div>
+        </div>
+    </footer>
 </div>
 
 
-                <!-- Social Media Icons -->
-                <div class="flex flex-col items-center">
-                    <h2 class="text-gray-800 font-semibold">Social Media</h2>
-                    <div class="flex space-x-4 mt-2 " style="height: 30px;" >
-                        <img src="{{ asset('storage/images/socialmedia.png') }}">
-                    </div>
-                </div>
-            </footer>
-        </div>
     </div>
 </body>
 </html>
