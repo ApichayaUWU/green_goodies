@@ -30,7 +30,7 @@
                             <div class="line"></div>
                             <tbody>
                                 
-                                @foreach($cartItems as $cartItem)
+                                @foreach($cartItems as $index => $cartItem) <!-- Add index for unique ID -->
                                     
                                     <div class="flex flex-row">
                                         <div>
@@ -42,22 +42,27 @@
                                         <div class="text-xl py-16 pl-4 pr-64 w-32">{{ $cartItem->product->name }}</div>
 
                                         <div class="text-xl py-16 pl-52 w-32">${{ number_format($cartItem->product->price, 2) }}</div>
+
                                         <div  class="text-xl py-14 pl-52">
                                             <div class="flex flex-row gap-4">   
                                                 <!-- Include Quantity Input Blade Component -->
-                                                <x-quantity-input :quantity="$cartItem->quantity" />
+                                                <x-quantity-input :quantity="$cartItem->quantity" data-index="{{ $index }}" />
                                             </div>
                                         </div>
-                                        <div class="text-xl py-16 pl-52 w-32"> ${{ number_format($cartItem->product->price * $cartItem->quantity, 2) }}</div>
+
+                                        <div class="text-xl py-16 pl-52 w-32 item-total-price" data-index="{{ $index }}"> 
+                                            ${{ number_format($cartItem->product->price * $cartItem->quantity, 2) }}
+                                        </div>
+
                                         <div class="text-xl py-16 pl-52 w-32">
                                             <form action="{{ route('cart.remove', $cartItem->id) }}" method="POST">
                                                 @csrf
                                                 @method('DELETE')
                                                 <x-cart-delete-btn/>
-
                                             </form>
                                         </div>
                                     </div>
+
                                     @if(!$loop->last)
                                         <div class="line2"></div>  
                                     @endif
@@ -66,35 +71,32 @@
                             </tbody>
                         </table>
 
-                        
-                        
                     @endif
                 </div>
             </div>
+
             <div class="mt-4 text-right bg-[#E3EBC1] pt-5 pb-3.5">
-                            <strong class="pr-20 mr-10 text-xl">Total :&thinsp; 	&thinsp; 
-                                <span class="total-amount">
-                                    ${{ number_format($cartItems->sum(function($item) {
-                                        return $item->product->price * $item->quantity;
-                                    }), 2) }}
-                                </span>
-                            </strong>
-                        </div>
-                        <div class="mt-2 text-right">
+                <strong class="pr-20 mr-10 text-xl">Total:&thinsp;
+                    <span class="total-amount">
+                        ${{ number_format($cartItems->sum(function($item) {
+                            return $item->product->price * $item->quantity;
+                        }), 2) }}
+                    </span>
+                </strong>
+            </div>
 
-                        <div class="flex flex-row justify-between my-4">
-                            <button class="ml-16" >
-                                <a href="{{ route('products.index') }}">
-                                <x-continue-shopping/>
-                                </a>
-                            </button>
-                            <button>
-                                <x-checkout/>
-                            </button>
-                            
-                    </div>
-
-            </div>       
+            <div class="mt-2 text-right">
+                <div class="flex flex-row justify-between my-4">
+                    <button class="ml-16">
+                        <a href="{{ route('products.index') }}">
+                            <x-continue-shopping/>
+                        </a>
+                    </button>
+                    <button>
+                        <x-checkout/>
+                    </button>
+                </div>
+            </div>
 
         </div>
     </div>
@@ -108,8 +110,8 @@
             const decrementButtons = document.querySelectorAll('[data-input-counter-decrement="quantity-input"]');
             const incrementButtons = document.querySelectorAll('[data-input-counter-increment="quantity-input"]');
             const quantityInputs = document.querySelectorAll('[data-input-counter]');
-            const itemTotalPrices = document.querySelectorAll('.item-total-price');
-            const totalAmountElement = document.querySelector('.total-amount'); // Element for grand total amount
+            const itemTotalPrices = document.querySelectorAll('.item-total-price'); // Individual item total prices
+            const totalAmountElement = document.querySelector('.total-amount'); // Grand total amount
 
             // Function to update the total price for each item
             const updateTotalPrice = function(index) {
