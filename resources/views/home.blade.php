@@ -55,15 +55,6 @@
         margin-top: -20px;
     }
 
-    .card {
-        max-width: 300px;
-        border-radius: 10px;
-        overflow: hidden;
-        box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
-        background-color: #EFEFEF;
-        margin-right: 15px;
-    }
-
     /* Scrollable product row */
     .products-container {
         max-width: screen;
@@ -91,7 +82,7 @@
     <div class="products-container"> <!-- Scrollable container -->
         <!-- Cards -->
         @foreach ($popularProducts as $product)
-        <x-product-card :product="$product" />
+        <x-product-card :product="$product" :isHomePage="true" />
         @endforeach
     </div>
 </div>

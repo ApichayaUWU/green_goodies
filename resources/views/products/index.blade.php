@@ -3,7 +3,7 @@
         body {
             background-color: white !important; 
         }
-        
+
         .brownBg{
             background-color: #F4EDDC;
         }
@@ -24,7 +24,7 @@
                 @else
                     <div class="flex flex-row flex-wrap justify-center">
                     @foreach ($products as $product)
-                    <x-product-card :product="$product" />
+                    <x-product-card :product="$product" :isHomePage="false" />
                             @endforeach
                 @endif
             </div>

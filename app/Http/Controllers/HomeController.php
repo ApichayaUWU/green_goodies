@@ -11,7 +11,7 @@ class HomeController extends Controller
     public function popular()
     {
         // Fetch products ordered by popularity (descending), limit to top 5 for example
-        $popularProducts = Product::orderBy('popularity', 'desc')->limit(5)->get(); 
+        $popularProducts = Product::orderBy('popularity', 'desc')->limit(10)->get(); 
 
         // Return the view with the products
         return view('home', [

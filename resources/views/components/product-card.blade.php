@@ -1,18 +1,26 @@
 <style>
     .card {
-            max-width: 300px;
-            border-radius: 10px;
-            overflow: hidden;
-            box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
-            background-color: #EFEFEF;
-            margin-right: 15px;
+        border-radius: 10px;
+        overflow: hidden;
+        box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+        background-color: #EFEFEF;
+        margin-right: 15px;
+    }
+    .home-card {
+        max-width: 250px;
+        min-width: 250px;
+    }
+
+    .products-card {
+        max-width: 300px;
+        min-width: 300px;
     }
 </style>
-<div class="card bg-white border rounded-lg shadow-md px-6 m-3 flex-col">
+<div class="card {{ $isHomePage ? 'home-card' : 'products-card' }} bg-white border rounded-lg shadow-md px-6 m-3 flex-col">
     <div onclick="window.location='{{ route('products.detail', $product->id) }}'">
         {{-- Product Image --}}
         @if($product->image)
-            <img src="{{ asset('storage/' . $product->image) }}" alt="{{ $product->name }}" class="rounded-lg w-240px h-222.03px object-cover my-3">
+            <img src="{{ asset('storage/' . $product->image) }}" alt="{{ $product->name }}" class="rounded-lg w-full h-auto object-cover my-3">
         @else
             <span>No image</span>
         @endif
@@ -26,7 +34,6 @@
     <div class="flex flex-row flex-wrap justify-center pb-5 justify-self-end">
         <form action="{{ route('cart.add', $product->id) }}" method="POST">
             @csrf
-            
             <div class="flex flex-row gap-4">
                 <x-heart-btn/>
                 <!-- Add to Cart Button -->
