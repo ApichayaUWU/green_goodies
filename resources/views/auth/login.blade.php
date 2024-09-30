@@ -1,14 +1,26 @@
 <x-guest-layout>
+    <link rel="preconnect" href="https://fonts.bunny.net">
+    <link href="https://fonts.bunny.net/css?family=manjari:700" rel="stylesheet" />
     <!-- Session Status -->
     <x-auth-session-status class="mb-4" :status="session('status')" />
+    <style>
+        .custom-input {
+            border: 2px solid #ccc; /* Default border color */
+            transition: border-color 0.3s; /* Smooth transition for border color */
+        }
 
+        .custom-input:focus {
+            border-color: #ACE094; /* Change to your desired color on focus */
+            outline: none; /* Remove default outline */
+        }
+    </style>
     <form method="POST" action="{{ route('login') }}">
         @csrf
 
         <!-- Email Address -->
         <div>
-            <x-input-label for="email" :value="__('Emailxx')" />
-            <x-text-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autofocus autocomplete="username" />
+            <x-input-label for="email" :value="__('Email')" />
+            <x-text-input id="email" class="custom-input block mt-1 w-full" type="email" name="email" :value="old('email')" required autofocus autocomplete="username" />
             <x-input-error :messages="$errors->get('email')" class="mt-2" />
         </div>
 
@@ -16,7 +28,7 @@
         <div class="mt-4">
             <x-input-label for="password" :value="__('Password')" />
 
-            <x-text-input id="password" class="block mt-1 w-full"
+            <x-text-input id="password" class="custom-input block mt-1 w-full"
                             type="password"
                             name="password"
                             required autocomplete="current-password" />
