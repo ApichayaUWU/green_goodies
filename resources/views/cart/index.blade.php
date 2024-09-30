@@ -89,7 +89,7 @@
                 </div>
             </div>
             <div class="mt-4 text-right bg-[#E3EBC1] pt-5 pb-3.5">
-                            <strong class="pr-20 mr-10 text-xl">Total : 	&thinsp; 	&thinsp;
+                            <strong class="pr-20 mr-10 text-xl">Total :&thinsp; 	&thinsp; 
                                 <span class="total-amount">
                                     ${{ number_format($cartItems->sum(function($item) {
                                         return $item->product->price * $item->quantity;
