@@ -11,6 +11,7 @@ use Illuminate\View\View;
 
 class UserAddressController extends Controller
 {
+    
     /**
      * Display the user's addresses form for editing or adding.
      */

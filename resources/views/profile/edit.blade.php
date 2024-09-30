@@ -23,7 +23,7 @@
                 <div class="max-w-xl">
                     @include('profile.partials.user-address-index', ['addresses' => $addresses])
                 </div>
-                <a href="()">
+                <a href="{{ route('address.form') }}">
                 <x-primary-button>create address</x-primary-button>
                 </a>
             </div>
