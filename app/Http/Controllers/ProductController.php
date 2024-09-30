@@ -17,7 +17,11 @@ class ProductController extends Controller
 
     public function show_detail(Product $product)
     {
-        
+        // Increment the popularity by 1
+        $product->popularity += 1;
+
+        // Save the updated product
+        $product->save();
         return view('products.detail', compact('product'));
     }
 

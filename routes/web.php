@@ -15,7 +15,7 @@ Route::get('/', function () {
 });
 
 // Replace the old home route with this one
-Route::get('/home', [HomeController::class, 'index'])->middleware(['auth', 'verified'])->name('home');
+Route::get('/home', [HomeController::class, 'popular'])->middleware(['auth', 'verified'])->name('home');
 
 Route::resource('products', ProductController::class);
 
@@ -33,7 +33,7 @@ Route::middleware('auth')->group(function () {
     // admin only
     Route::get('/products/create', [ProductController::class, 'form'])->name('products.form');
     Route::post('/products/create', [ProductController::class, 'store'])->name('products.form');
-
+    
     // detail of each product
     Route::get('/products/{product}', [ProductController::class, 'show_detail'])->name('products.detail');
     Route::post('/products/{product}', [CartController::class, 'addToCart'])->name('cart.add');

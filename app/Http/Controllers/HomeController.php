@@ -8,14 +8,14 @@ use App\Models\Product;
 
 class HomeController extends Controller
 {
-    public function index()
+    public function popular()
     {
-        // Fetch all products (you can modify this to paginate or filter if necessary)
-        $products = Product::all(); // You could also paginate: Product::paginate(10)
+        // Fetch products ordered by popularity (descending), limit to top 5 for example
+        $popularProducts = Product::orderBy('popularity', 'desc')->limit(5)->get(); 
 
         // Return the view with the products
         return view('home', [
-            'products' => $products,
+            'popularProducts' => $popularProducts, // Pass the popular products to the view
         ]);
     }
 }
