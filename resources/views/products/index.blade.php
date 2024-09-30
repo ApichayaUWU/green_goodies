@@ -1,81 +1,93 @@
-<x-app-layout>
-    <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+<x-app-layout >
+    <style>
+        body {
+            background-color: white !important; 
+        }
+        .card {
+            max-width: 300px;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+            background-color: #EFEFEF;
+        }
+        
+        .brownBg{
+            background-color: #F4EDDC;
+        }
+
+        .textColor{
+            color: #4C4343;
+        }
+    </style>
+    <div class = "brownBg pt-6 pb-3 flex flex-row flex-wrap justify-center">
+        <h2 class="font-semibold text-4xl text-gray-800 leading-tight">
             {{ __('Our Products') }}
         </h2>
-    </x-slot>
-
-    <div class="py-12">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                <div class="p-6 text-gray-900">
-                    @if($products->isEmpty())
-                        <p>No products available at the moment.</p>
-                    @else
-                        <table class="min-w-full table-auto">
-                            <thead>
-                                <tr>
-                                    <th class="px-4 py-2">Image</th>
-                                    <th class="px-4 py-2">Name</th>
-                                    <th class="px-4 py-2">Category</th>
-                                    <th class="px-4 py-2">Price</th>
-                                    <th class="px-4 py-2">Stock</th>
-                                    <th class="px-4 py-2">Description</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @foreach ($products as $product)
-                                    <tr class="border-b cursor-pointer hover:bg-gray-100" onclick="window.location='{{ route('products.detail', $product->id) }}'">
-                                        {{-- Product Image --}}
-                                        <td class="px-4 py-2">
-                                            @if($product->image)
-                                                <img src="{{ asset('storage/' . $product->image) }}" alt="{{ $product->name }}" class="w-16 h-16 object-cover">
-                                            @else
-                                                <span>No image</span>
-                                            @endif
-                                        </td>
-                                        
-                                        {{-- Product Name --}}
-                                        <td class="px-4 py-2">
-                                            <a href="{{ route('products.detail', $product->id) }}" class="text-blue-600 hover:underline">
-                                                {{ $product->name }}
-                                            </a>
-                                        </td>
-                                        
-                                        {{-- Product Category --}}
-                                        <td class="px-4 py-2">
-                                            <a href="{{ route('products.detail', $product->id) }}" class="text-blue-600 hover:underline">
-                                                {{ $product->category->name ?? 'Uncategorized' }}
-                                            </a>
-                                        </td>
-                                        
-                                        {{-- Product Price --}}
-                                        <td class="px-4 py-2">
-                                            <a href="{{ route('products.detail', $product->id) }}" class="text-blue-600 hover:underline">
-                                                ${{ number_format($product->price, 2) }}
-                                            </a>
-                                        </td>
-                                        
-                                        {{-- Stock Quantity --}}
-                                        <td class="px-4 py-2">
-                                            <a href="{{ route('products.detail', $product->id) }}" class="text-blue-600 hover:underline">
-                                                {{ $product->stock_quantity }}
-                                            </a>
-                                        </td>
-                                        
-                                        {{-- Description --}}
-                                        <td class="px-4 py-2">
-                                            <a href="{{ route('products.detail', $product->id) }}" class="text-blue-600 hover:underline">
-                                                {{ Str::limit($product->description, 50) }}
-                                            </a>
-                                        </td>
-                                    </tr>
-                                @endforeach
-                            </tbody>
-                        </table>
-                    @endif
-                </div>
+    </div>
+        <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
+            <div class="p-3 text-gray-900">
+                @if($products->isEmpty())
+                    <p>No products available at the moment.</p>
+                @else
+                    <div class="flex flex-row flex-wrap justify-center">
+                    @foreach ($products as $product)
+                         <div class="card max-w-sm bg-white border rounded-lg shadow-md px-6 m-3 flex-col " >
+                                <div onclick="window.location='{{ route('products.detail', $product->id) }}'">
+                                    {{-- Product Image --}}
+                                    @if($product->image)
+                                        <img  src="{{ asset('storage/' . $product->image) }}" alt="{{ $product->name }}" class="rounded-lg w-240px h-222.03px object-cover my-3">
+                                    @else
+                                        <span>No image</span>
+                                    @endif
+                                    <h2 class="text-2xl font-semibold textColor truncate">
+                                        {{ $product->name }}
+                                    </h2>
+                                    <p class="text-lg py-2 textColor">
+                                        ${{ number_format($product->price, 2) }}
+                                    </p>
+                                </div>
+                                <div class="flex flex-row flex-wrap justify-center pb-5 justify-self-end">
+                                    <button class="px-5">
+                                        <svg width="34" height="31" viewBox="0 0 34 31" fill="none" xmlns="http://www.w3.org/2000/svg"> 
+                                            <path d="M17.4998 25.9167L17.3332 26.0833L17.1498 25.9167C9.23317 18.7333 3.99984 13.9833 3.99984 9.16667C3.99984 5.83333 6.49984 3.33333 9.83317 3.33333C12.3998 3.33333 14.8998 5 15.7832 7.26667H18.8832C19.7665 5 22.2665 3.33333 24.8332 3.33333C28.1665 3.33333 30.6665 5.83333 30.6665 9.16667C30.6665 13.9833 25.4332 18.7333 17.4998 25.9167ZM24.8332 0C21.9332 0 19.1498 1.35 17.3332 3.46667C15.5165 1.35 12.7332 0 9.83317 0C4.69984 0 0.666504 4.01667 0.666504 9.16667C0.666504 15.45 6.33317 20.6 14.9165 28.3833L17.3332 30.5833L19.7498 28.3833C28.3332 20.6 33.9998 15.45 33.9998 9.16667C33.9998 4.01667 29.9665 0 24.8332 0Z" fill="#4C4343"/>
+                                        </svg>
+                                    </button>
+                                    <form action="{{ route('cart.add', $product->id) }}" method="POST">
+                                        @csrf
+                                        <div class="flex flex-row gap-4">
+                                        <!-- Add to Cart Button -->
+                                            <div class="hidden"><x-quantity-input/></div>
+                                            <button class="px-5" type="submit">
+                                                <svg width="95" height="40" viewBox="0 0 95 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                    <rect x="0.333252" width="94.2222" height="40" rx="20" fill="#ACE094"/>
+                                                    <path d="M37.7395 29.2695C37.5442 29.2695 37.3567 29.1836 37.177 29.0117C37.0051 28.8398 36.9192 28.6602 36.9192 28.4727C36.9192 28.2852 36.9465 28.1367 37.0012 28.0273L43.4348 13.3203C43.4895 13.2031 43.5911 13.0859 43.7395 12.9688C43.8958 12.8516 44.0481 12.793 44.1965 12.793C44.6184 12.793 44.9036 12.9688 45.052 13.3203L51.4973 28.0039C51.5442 28.1055 51.5676 28.2188 51.5676 28.3438C51.5676 28.5625 51.4934 28.7695 51.345 28.9648C51.2043 29.1523 51.0208 29.2461 50.7942 29.2461C50.3333 29.2461 50.0286 29.0664 49.8801 28.707L47.5247 23.3281H41.009L38.6067 28.7305C38.4583 29.0898 38.1692 29.2695 37.7395 29.2695ZM44.2434 15.875L41.7708 21.5703H46.7512L44.2434 15.875ZM58.2004 29.2461C57.1379 29.2461 56.1965 28.9648 55.3762 28.4023C54.5559 27.8398 53.9114 27.1016 53.4426 26.1875C52.9739 25.2656 52.7395 24.2773 52.7395 23.2227C52.7395 22.4258 52.8762 21.6562 53.1497 20.9141C53.4231 20.1719 53.8098 19.5117 54.3098 18.9336C54.8098 18.3477 55.3997 17.8828 56.0793 17.5391C56.759 17.1953 57.5012 17.0234 58.3059 17.0234C59.0715 17.0234 59.7708 17.2148 60.4036 17.5977C61.0364 17.9805 61.5911 18.4219 62.0676 18.9219V13.625C62.0676 13.3828 62.1536 13.1758 62.3254 13.0039C62.4973 12.832 62.7043 12.7461 62.9465 12.7461C63.1965 12.7461 63.4036 12.832 63.5676 13.0039C63.7395 13.1758 63.8254 13.3828 63.8254 13.625V28.3789C63.8254 28.6211 63.7395 28.8281 63.5676 29C63.3958 29.1719 63.1887 29.2578 62.9465 29.2578C62.7043 29.2578 62.5051 29.1719 62.3489 29C62.2004 28.8281 62.1262 28.6211 62.1262 28.3789L62.0676 27.2539C61.6223 27.707 61.0715 28.1523 60.4153 28.5898C59.759 29.0273 59.0208 29.2461 58.2004 29.2461ZM58.2356 27.4883C59.0325 27.4883 59.7161 27.2734 60.2864 26.8438C60.8567 26.4141 61.2942 25.8594 61.5989 25.1797C61.9036 24.5 62.0559 23.793 62.0559 23.0586C62.0559 22.3242 61.9036 21.6328 61.5989 20.9844C61.302 20.3359 60.8723 19.8086 60.3098 19.4023C59.7473 18.9883 59.0715 18.7812 58.2825 18.7812C57.5247 18.7812 56.8645 19 56.302 19.4375C55.7395 19.8672 55.302 20.4258 54.9895 21.1133C54.677 21.793 54.5208 22.5078 54.5208 23.2578C54.5208 24 54.6731 24.6953 54.9778 25.3438C55.2903 25.9844 55.7239 26.5039 56.2786 26.9023C56.8411 27.293 57.4934 27.4883 58.2356 27.4883ZM71.8645 29.2461C70.802 29.2461 69.8606 28.9648 69.0403 28.4023C68.22 27.8398 67.5754 27.1016 67.1067 26.1875C66.6379 25.2656 66.4036 24.2773 66.4036 23.2227C66.4036 22.4258 66.5403 21.6562 66.8137 20.9141C67.0872 20.1719 67.4739 19.5117 67.9739 18.9336C68.4739 18.3477 69.0637 17.8828 69.7434 17.5391C70.4231 17.1953 71.1653 17.0234 71.97 17.0234C72.7356 17.0234 73.4348 17.2148 74.0676 17.5977C74.7004 17.9805 75.2551 18.4219 75.7317 18.9219V13.625C75.7317 13.3828 75.8176 13.1758 75.9895 13.0039C76.1614 12.832 76.3684 12.7461 76.6106 12.7461C76.8606 12.7461 77.0676 12.832 77.2317 13.0039C77.4036 13.1758 77.4895 13.3828 77.4895 13.625V28.3789C77.4895 28.6211 77.4036 28.8281 77.2317 29C77.0598 29.1719 76.8528 29.2578 76.6106 29.2578C76.3684 29.2578 76.1692 29.1719 76.0129 29C75.8645 28.8281 75.7903 28.6211 75.7903 28.3789L75.7317 27.2539C75.2864 27.707 74.7356 28.1523 74.0793 28.5898C73.4231 29.0273 72.6848 29.2461 71.8645 29.2461ZM71.8997 27.4883C72.6965 27.4883 73.3801 27.2734 73.9504 26.8438C74.5208 26.4141 74.9583 25.8594 75.2629 25.1797C75.5676 24.5 75.72 23.793 75.72 23.0586C75.72 22.3242 75.5676 21.6328 75.2629 20.9844C74.9661 20.3359 74.5364 19.8086 73.9739 19.4023C73.4114 18.9883 72.7356 18.7812 71.9465 18.7812C71.1887 18.7812 70.5286 19 69.9661 19.4375C69.4036 19.8672 68.9661 20.4258 68.6536 21.1133C68.3411 21.793 68.1848 22.5078 68.1848 23.2578C68.1848 24 68.3372 24.6953 68.6418 25.3438C68.9543 25.9844 69.3879 26.5039 69.9426 26.9023C70.5051 27.293 71.1575 27.4883 71.8997 27.4883Z" fill="#4C4343"/>
+                                                    <path d="M13.1973 25.455C12.3393 22.023 11.9103 20.308 12.8113 19.154C13.7123 18 15.4813 18 19.0183 18H23.6483C27.1863 18 28.9543 18 29.8553 19.154C30.7563 20.308 30.3273 22.024 29.4693 25.455C28.9233 27.638 28.6513 28.729 27.8373 29.365C27.0233 30 25.8983 30 23.6483 30H19.0183C16.7683 30 15.6433 30 14.8293 29.365C14.0153 28.729 13.7423 27.638 13.1973 25.455Z" stroke="#4C4343" stroke-width="1.5"/>
+                                                    <path opacity="0.5" d="M28.8333 18.5L28.1233 15.895C27.8493 14.89 27.7123 14.388 27.4313 14.009C27.1511 13.6325 26.7706 13.3424 26.3333 13.172C25.8933 13 25.3733 13 24.3333 13M13.8333 18.5L14.5433 15.895C14.8173 14.89 14.9543 14.388 15.2353 14.009C15.5154 13.6325 15.8959 13.3424 16.3333 13.172C16.7733 13 17.2933 13 18.3333 13" stroke="#4C4343" stroke-width="1.5"/>
+                                                    <path d="M18.3333 13C18.3333 12.7348 18.4386 12.4804 18.6261 12.2929C18.8137 12.1054 19.068 12 19.3333 12H23.3333C23.5985 12 23.8528 12.1054 24.0404 12.2929C24.2279 12.4804 24.3333 12.7348 24.3333 13C24.3333 13.2652 24.2279 13.5196 24.0404 13.7071C23.8528 13.8946 23.5985 14 23.3333 14H19.3333C19.068 14 18.8137 13.8946 18.6261 13.7071C18.4386 13.5196 18.3333 13.2652 18.3333 13Z" stroke="#4C4343" stroke-width="1.5"/>
+                                                </svg>
+                                            </button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                            @endforeach
+                @endif
             </div>
         </div>
-    </div>
+
+        
+    <!-- Include SweetAlert2 from CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+<script>
+    // Check if the session has a success message
+    @if(session('success'))
+        Swal.fire({
+            title: 'Success!',
+            text: "{{ session('success') }}",
+            icon: 'success',
+            confirmButtonText: 'OK'
+        });
+    @endif
+    </script>
 </x-app-layout>
