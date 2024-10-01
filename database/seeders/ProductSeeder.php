@@ -413,7 +413,7 @@ class ProductSeeder extends Seeder
             ],
             [
                 'name' => 'Okrong Mango',
-                'image' => 'images/fruit/มะม่วงเขียวอกร่อง.jpg', // Corrected path
+                'image' => 'images/fruit/มะม่วงอกร่อง.jpg', // Corrected path
                 'category_id' => 2,
                 'description' => 'chest rift mango',
                 'price' => 500,
