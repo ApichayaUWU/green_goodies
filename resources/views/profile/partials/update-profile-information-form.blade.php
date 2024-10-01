@@ -47,7 +47,7 @@
         }
 
         .choose_file {
-            width: 200px;
+            width: 100px;
 
         }
         </style>
@@ -70,7 +70,7 @@
 
 
 
-        <div class="flex flex-row ">
+        <div class="flex flex-row justify-between">
 
             <form method="post" action="{{ route('profile.update') }}" class="mt-6 space-y-6">
                 <div class="flex flex-col ">
@@ -156,9 +156,9 @@
 
 
 
-            <div class="blank"> </div>
+            <!-- <div class="blank"> </div> -->
 
-            <div class="flex flex-col ">
+            <div class="flex flex-col mr-60">
                 <form method="post" action="{{ route('profile.photo.update') }}" enctype="multipart/form-data" class="">
                     @csrf
                     <div class="">
@@ -190,7 +190,6 @@
                         <input
                             class="block w-full text-sm text-color:#4C4343 border border-gray-300  cursor-pointer bg-gray-50 dark:text-color:#4C4343 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"
                             aria-describedby="file_input_help" id="profile_photo" type="file" name="profile_photo">
-                        <!-- <input type="file" name="profile_photo" id="profile_photo" class="mt-1 block w-full" /> -->
                         <x-input-error class="mt-2" :messages="$errors->get('profile_photo')" />
                     </div>
 

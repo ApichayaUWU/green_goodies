@@ -8,6 +8,11 @@
         color: #4C4343;
     }
 
+    h4 {
+
+        color: #4C4343;
+    }
+
     p {
         font-weight: lighter;
         margin-right: 10px;
@@ -39,10 +44,11 @@
 <div class="space-y-4">
 
     @foreach($addresses as $address)
-    <div class="line"></div>
+
 
     <div class="box">
-        <div class="flex flex-row justify-between">
+        <div class="line"></div>
+        <div class="flex flex-row justify-between mt-4">
             <div class="flex flex-col">
                 <h4 class="text-lg font-bold">Address {{ $loop->iteration }}</h4>
                 <p><strong>Address Line 1:</strong> {{ $address->address_line1 }}</p>
