@@ -8,11 +8,14 @@
     cursor: pointer;
     /* Change cursor on hover */
 }
+.button-background {
+    transition: fill 0.5s ease;
+}
 
 .custom-button:hover .button-background {
-    fill: #EEEEEE;
-    /* Change this to your desired hover color */
+    fill: #FFFFFF; 
 }
+
 </style>
 <button type="submit" class="custom-button ml-96 pl-32">
 <a href="{{ route('products.index') }}">
