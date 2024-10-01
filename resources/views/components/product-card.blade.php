@@ -15,11 +15,18 @@
         max-width: 300px;
         min-width: 300px;
     }
+
+    .wl{
+        margin-right: 35px;
+        margin-top: 3px;
+    }
+
     .img1 {
         width: 100%;
         height: 250px;
         object-fit: cover; 
     }
+
 
 </style>
 <div class="card {{ $isHomePage ? 'home-card' : 'products-card' }} bg-white border rounded-lg shadow-md px-6 m-3 flex-col">
@@ -38,11 +45,11 @@
         </p>
     </div>
     <div class="flex flex-row flex-wrap justify-center pb-5 justify-self-end">
+        <x-heart-btn :productId="$product->id" />
         <form action="{{ route('cart.add', $product->id) }}" method="POST">
             @csrf
             <div class="flex flex-row gap-4">
-                <x-heart-btn/>
-                <!-- Add to Cart Button -->
+                 <!-- Add to Cart Button -->
                 <div class="hidden"><x-quantity-input /></div>
                 <x-add-to-cart />
             </div>

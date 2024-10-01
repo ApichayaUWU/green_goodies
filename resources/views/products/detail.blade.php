@@ -34,6 +34,9 @@
     .DetailProduct {
         width: 661px;
     }
+    .wishlist{
+        margin-top : 8px;
+    }
     </style>
 
     <div class="brownBg pt-6 pb-3 flex flex-row flex-wrap justify-center">
@@ -77,7 +80,7 @@
                         </div>
                     </form>
 
-                    <x-wishlist-btn/>
+                    <x-heart-btn :productId="$product->id" />
                 </div>
             </div>
         </div>

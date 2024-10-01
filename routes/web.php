@@ -10,6 +10,7 @@ use App\Http\Controllers\UserAddressController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\SearchController;
 use App\Http\Controllers\WishlistController;
+use App\Http\Controllers\SummaryController;
 
 
 
@@ -63,9 +64,15 @@ Route::middleware('auth')->group(function () {
     Route::get('/search', [SearchController::class, 'search']);
 
     // wishlist
-    Route::get('/wishlist/{productId}', [WishListController::class, 'index'])->name('wishlist.index');
+    Route::get('/wishlist/{productId}', [WishListController::class, 'show'])->name('wishlist.toggle');
     Route::post('/wishlist/{productId}', [WishlistController::class, 'toggleWishlist'])->name('wishlist.toggle');
+    Route::get('/wishlist', [WishListController::class, 'index'])->name('wishlist.index');
 
+    // summary
+    Route::get('/summary', [SummaryController::class, 'show'])->name('summary.show');
+    Route::post('/add-sale', [SummaryController::class, 'add_sale'])->name('add.sale');
+    //Route::get('/summarylog', [SummaryController::class, 'showlog'])->name('summary.show');
+    Route::get('/order-success', [SummaryController::class, 'orderSuccess'])->name('order_success');
 
 });
 
