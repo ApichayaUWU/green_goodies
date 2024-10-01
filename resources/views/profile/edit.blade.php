@@ -51,7 +51,7 @@
             <div class="box">
                 <div class="flex flex-row justify-between ">
                     <div>
-                        <h1 class="text-xl"> Address</h1>
+                        <h1 class="text-lg ml-9"> Address</h1>
                     </div>
 
 
