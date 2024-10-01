@@ -33,6 +33,11 @@ class ProductController extends Controller
         return view('products.fruits', compact('products'));
     }
 
+    public function search($searchTerm){
+        $products = Product::where('name', 'like', '%' . $searchTerm)->paginate(8);
+        return view('products.index', compact('products'));
+    }
+
     public function show_detail(Product $product)
     {
         // Increment the popularity by 1

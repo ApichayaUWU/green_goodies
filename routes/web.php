@@ -37,6 +37,8 @@ Route::middleware('auth')->group(function () {
     Route::get('/vegetables', [ProductController::class, 'showVegetable'])->name('products.vegetables');
     Route::get('/fruits', [ProductController::class, 'showFruit'])->name('products.fruits');
     
+    Route::get('/search/{searchTerm}', [ProductController::class, 'search'])->name('products.index');
+
     // admin only
     Route::get('/products/create', [ProductController::class, 'form'])->name('products.form');
     Route::post('/products/create', [ProductController::class, 'store'])->name('products.form');
