@@ -40,4 +40,15 @@ class Product extends Model
     {
         return $this->hasMany(SalesOrderDetail::class, 'product_id');
     }
+
+    public function wishlists()
+    {
+        return $this->hasMany(WishList::class, 'product_id');
+    }
+
+    public function carts()
+    {
+        return $this->hasMany(Cart::class, 'product_id');
+    }
+
 }

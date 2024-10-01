@@ -7,15 +7,18 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\UserAddressController;
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\SearchController;
+use App\Http\Controllers\WishlistController;
+
 
 
 Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/home', function () {
-    return view('home');
-})->middleware(['auth', 'verified'])->name('home');
+// Replace the old home route with this one
+Route::get('/home', [HomeController::class, 'popular'])->middleware(['auth', 'verified'])->name('home');
 
 Route::resource('products', ProductController::class);
 
@@ -30,10 +33,14 @@ Route::middleware('auth')->group(function () {
     
     // route to /products show for users
     Route::get('/products', [ProductController::class, 'show'])->name('products.index');
+    // fruit and vegetable
+    Route::get('/vegetables', [ProductController::class, 'showVegetable'])->name('products.vegetables');
+    Route::get('/fruits', [ProductController::class, 'showFruit'])->name('products.fruits');
+    
     // admin only
     Route::get('/products/create', [ProductController::class, 'form'])->name('products.form');
     Route::post('/products/create', [ProductController::class, 'store'])->name('products.form');
-
+    
     // detail of each product
     Route::get('/products/{product}', [ProductController::class, 'show_detail'])->name('products.detail');
     Route::post('/products/{product}', [CartController::class, 'addToCart'])->name('cart.add');
@@ -47,9 +54,16 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile/address/create', [UserAddressController::class, 'form'])->name('address.form');
     Route::post('/profile/address', [UserAddressController::class, 'store'])->name('address.store');
     Route::delete('/profile/address/{id}', [UserAddressController::class, 'destroy'])->name('address.destroy');
-
     Route::get('/profile/address/{id}/edit', [UserAddressController::class, 'edit'])->name('address.edit');
     Route::put('/profile/address/{id}', [UserAddressController::class, 'update'])->name('address.update');
+
+    // search bar
+    Route::get('/search', [SearchController::class, 'search']);
+
+    // wishlist
+    Route::get('/wishlist/{productId}', [WishListController::class, 'index'])->name('wishlist.index');
+    Route::post('/wishlist/{productId}', [WishlistController::class, 'toggleWishlist'])->name('wishlist.toggle');
+
 
 });
 

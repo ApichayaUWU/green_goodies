@@ -68,6 +68,7 @@
                         @csrf
 
                         <!-- Add New Address -->
+
                         <div class="box">
                             <h4 class="text-lg font-bold mb-7">Address</h4>
                             <div class="line"></div>
@@ -123,6 +124,7 @@
 
                         </div>
                 </div>
+
                 </form>
 
             </div>
