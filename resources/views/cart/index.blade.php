@@ -1,6 +1,5 @@
 <x-app-layout>
-
-    <div class="bg-white">
+    <div class="bg-white flex justify-center custom-margin2">
         <x-cart-header/>
     </div>
     
@@ -12,8 +11,8 @@
                     @if($cartItems->isEmpty())
                         <p>Your cart is empty.</p>
                     @else
-                         <table class="min-w-full border-collapse">
-                                <div class="flex flex-row">
+                         <table class="min-w-full border-collapse mx-auto">
+                                <div class="flex flex-row justify-center">
                                     <div class="text-2xl pl-4 pr-64 w-240">
                                         Product
                                     </div>
@@ -32,7 +31,7 @@
                                 
                                 @foreach($cartItems as $index => $cartItem) <!-- Add index for unique ID -->
                                     
-                                    <div class="flex flex-row">
+                                    <div class="flex flex-row justify-center">
                                         <div>
                                             <img src="{{ asset('storage/' . $cartItem->product->image) }}" 
                                                 alt="{{ $cartItem->product->name }}" 
@@ -75,8 +74,8 @@
                 </div>
             </div>
 
-            <div class="mt-4 text-right bg-[#E3EBC1] pt-5 pb-3.5">
-                <strong class="pr-20 mr-10 text-xl">Total:&thinsp;
+            <div class="mt-4 bg-[#E3EBC1] pt-5 pb-3.5 flex justify-center">
+                <strong class="text-xl custom-margin1">Total:&thinsp;
                     <span class="total-amount">
                         ${{ number_format($cartItems->sum(function($item) {
                             return $item->product->price * $item->quantity;
@@ -85,16 +84,12 @@
                 </strong>
             </div>
 
-            <div class="mt-2 text-right">
-                <div class="flex flex-row justify-between my-4">
-                    <button class="ml-16">
-                        <a href="{{ route('products.index') }}">
+            <div class="mt-2">
+                <div class="flex flex-row my-4 justify-center">
                             <x-continue-shopping/>
-                        </a>
-                    </button>
-                    <button>
-                        <x-checkout/>
-                    </button>
+
+                            <x-checkout/>
+
                 </div>
             </div>
 
@@ -222,76 +217,12 @@
     border-radius:20%;
     border: 2px solid #4C4343;
 }
-.border_buttom{
-
+.custom-margin1{
+    margin-left: 1150px;
 }
-
+.custom-margin2{
+    margin-right: 1250px;
+}
 </style>
 </head>
 </html> 
-
-<!-- /* cart */
-
-position: absolute;
-width: 287px;
-height: 75px;
-left: 31px;
-top: 167px;
-
-/* Rectangle 3 */
-
-position: absolute;
-width: 287px;
-height: 75px;
-left: 31px;
-top: 167px;
-
-/* เขียวตัวหนังสือ */
-background: #53B637;
-border-radius: 60px;
-
-/* My Cart */
-
-position: absolute;
-width: 180px;
-height: 55px;
-left: 114px;
-top: 184px;
-
-font-family: 'Manjari';
-font-style: normal;
-font-weight: 400;
-font-size: 50px;
-line-height: 55px;
-/* identical to box height */
-
-color: #FFFFFF;
-
-/* fluent:cart-16-regular */
-
-position: absolute;
-width: 50px;
-height: 50px;
-left: 44px;
-top: 180px;
-
-/* Vector */
-
-position: absolute;
-left: 12.5%;
-right: 13.99%;
-top: 12.5%;
-bottom: 12.5%;
-
-background: #FFFFFF; -->
-
-<!-- /* Line 4 */
-
-position: absolute;
-width: 1271px;
-height: 0px;
-left: 50px;
-top: 343px;
-
-/* เทาอ่อน */
-border: 1px solid #8A8A8A; -->
