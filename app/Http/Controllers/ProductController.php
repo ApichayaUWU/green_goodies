@@ -5,14 +5,32 @@ namespace App\Http\Controllers;
 use App\Models\Product;
 use App\Models\ProductCategory;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 
 class ProductController extends Controller
 {
-    // For displaying all products to users
+    //For displaying all products to users
     public function show()
     {
-        $products = Product::all();
+        $products = Product::paginate(8);
         return view('products.index', compact('products'));
+    }
+
+    public function showVegetable()
+    {
+        $products = DB::table('products as p')
+        ->join('product_categories as pc', 'p.category_id', '=', 'pc.id')
+        ->where('pc.id', 1)->paginate(8);
+        return view('products.vegetables', compact('products'));
+    }
+
+    public function showFruit()
+    {
+        $products = DB::table('products as p')
+        ->join('product_categories as pc', 'p.category_id', '=', 'pc.id')
+        ->where('pc.id', 2)->paginate(8);
+        return view('products.fruits', compact('products'));
     }
 
     public function show_detail(Product $product)

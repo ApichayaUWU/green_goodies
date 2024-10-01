@@ -61,4 +61,15 @@ class User extends Authenticatable
     {
         return $this->hasMany(SalesOrderDetail::class, 'user_id');
     }
+
+    public function wishlists()
+    {
+        return $this->hasMany(WishList::class, 'user_id');
+    }
+
+    public function cart()
+    {
+        return $this->hasMany(Cart::class, 'user_id');
+    }
+
 }

@@ -3,9 +3,6 @@
     body {
         background-color: white !important;
     }
-            {{ __('Our Products') }}
-        </h2>
-    </div>
 
     .brownBg {
         background-color: #F4EDDC;
