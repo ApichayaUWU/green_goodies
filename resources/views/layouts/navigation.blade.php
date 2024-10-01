@@ -118,12 +118,10 @@
     }
 </script>
 
-
-
             <!-- wishlist cart and username -->
             <div class="hidden sm:flex sm:items-center sm:ms-6 space-x-4 nav-link-padding group">
                 <!-- Wishlist and Cart with Icons -->
-                <x-nav-link class="custom-text-size">
+                <x-nav-link :href="route('wishlist.index')" class="custom-text-size">
                     <img src="{{ asset('storage/images/wishlist.png') }}" class="cart-wishlist ">
                     {{ __('Wishlist') }}
                 </x-nav-link>

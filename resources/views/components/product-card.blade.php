@@ -15,6 +15,10 @@
         max-width: 300px;
         min-width: 300px;
     }
+    .wl{
+        margin-right: 35px;
+        margin-top: 3px;
+    }
 </style>
 <div class="card {{ $isHomePage ? 'home-card' : 'products-card' }} bg-white border rounded-lg shadow-md px-6 m-3 flex-col">
     <div onclick="window.location='{{ route('products.detail', $product->id) }}'">

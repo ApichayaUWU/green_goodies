@@ -19,8 +19,8 @@ class WishListController extends Controller
         $wishlistItems = Wishlist::where('user_id', auth()->id())
             ->with('product') // Eager load the product
             ->get();
-        //return view('wishlist.index', compact('wishlistItems'));
-        return response()->json($wishlistItems);
+        return view('wishlist.index', compact('wishlistItems'));
+        //return response()->json($wishlistItems);
     }
 
     public function show()
@@ -34,25 +34,25 @@ class WishListController extends Controller
 
 
     public function toggleWishlist(Request $request, $product)
-    {
-        $userId = Auth::id();
+{
+    $userId = Auth::id();
 
-        // Check if the product is already in the wishlist
-        $wishlistItem = WishList::where('user_id', $userId)
-                                  ->where('product_id', $product)
-                                  ->first();
+    // Check if the product is already in the wishlist
+    $wishlistItem = WishList::where('user_id', $userId)
+                              ->where('product_id', $product)
+                              ->first();
 
-        if ($wishlistItem) {
-            // If it exists, delete it (unwish)
-            $wishlistItem->delete();
-            return redirect()->back()->with('status', 'removed');
-        } else {
-            // If it doesn't exist, create it (wish)
-            WishList::create([
-                'user_id' => $userId,
-                'product_id' => $product,
-            ]);
-            return redirect()->back()->with('status', 'added');
-        }
+    if ($wishlistItem) {
+        // If it exists, delete it (unwish)
+        $wishlistItem->delete();
+        return back()->with('success', 'Product removed from wishlist!');
+    } else {
+        // If it doesn't exist, create it (wish)
+        WishList::create([
+            'user_id' => $userId,
+            'product_id' => $product,
+        ]);
+        return back()->with('success', 'Product added to wishlist!');
     }
+}
 }
