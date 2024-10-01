@@ -2,6 +2,11 @@
 
     <head>
         <style>
+        h1 {
+            text-align: left;
+            color: #4C4343;
+        }
+
         .input {
             border-radius: 100%;
             border: 1px solid #000000;
@@ -38,7 +43,7 @@
             color: #4C4343;
         }
 
-        img {
+        .profile {
 
             border-radius: 100%;
             padding: 4px;
@@ -59,7 +64,7 @@
                 {{ __('Profile Information') }}
             </h1>
 
-            <p class="mt-1 text-sm text-color: #8A8A8A">
+            <p class="mt-1 text-sm text-color: #8A8A8A ml-6">
                 {{ __("Update your account's profile information and email address.") }}
             </p>
         </header>
@@ -73,7 +78,7 @@
         <div class="flex flex-row justify-between">
 
             <form method="post" action="{{ route('profile.update') }}" class="mt-6 space-y-6">
-                <div class="flex flex-col ">
+                <div class="flex flex-col ml-6 ">
 
                     @csrf
                     @method('patch')
@@ -163,11 +168,12 @@
                     @csrf
                     <div class="">
                         @if(Auth::user()->profile_photo)
-                        <div class="mb-4">
-                            <img src="{{ asset('storage/' . Auth::user()->profile_photo) }}" alt="Profile Photo">
+                        <div class="mb-4 ">
+                            <img src="{{ asset('storage/' . Auth::user()->profile_photo) }}" alt="Profile Photo"
+                                class="profile">
                         </div>
                         @else
-                        <div class="mb-4">
+                        <div class=" mb-4">
                             <svg width="195" height="195" viewBox="0 0 200 200" fill="none"
                                 xmlns="http://www.w3.org/2000/svg">
                                 <g clip-path="url(#clip0_147_606)">
@@ -188,7 +194,7 @@
 
                     <div class="choose_file">
                         <input
-                            class="block w-full text-sm text-color:#4C4343 border border-gray-300  cursor-pointer bg-gray-50 dark:text-color:#4C4343 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"
+                            class="block w-full text-sm text-color:#4C4343 cursor-pointer bg-gray-50 dark:text-color:#4C4343 focus:outline-none dark:bg-gray-700 dark:placeholder-gray-400"
                             aria-describedby="file_input_help" id="profile_photo" type="file" name="profile_photo">
                         <x-input-error class="mt-2" :messages="$errors->get('profile_photo')" />
                     </div>
