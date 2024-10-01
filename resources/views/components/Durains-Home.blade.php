@@ -1,5 +1,5 @@
 <button class="button1">
-    <a href="/search/Durian">
+    <a href="/categore/Durian">
 
         <svg width="175" height="175" viewBox="0 0 150 150" fill="none" xmlns="http://www.w3.org/2000/svg"
             xmlns:xlink="http://www.w3.org/1999/xlink">
