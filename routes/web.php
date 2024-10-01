@@ -8,6 +8,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\UserAddressController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\SearchController;
 use App\Http\Controllers\WishlistController;
 
 
@@ -55,6 +56,9 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile/address/{id}', [UserAddressController::class, 'destroy'])->name('address.destroy');
     Route::get('/profile/address/{id}/edit', [UserAddressController::class, 'edit'])->name('address.edit');
     Route::put('/profile/address/{id}', [UserAddressController::class, 'update'])->name('address.update');
+
+    // search bar
+    Route::get('/search', [SearchController::class, 'search']);
 
     // wishlist
     Route::get('/wishlist/{productId}', [WishListController::class, 'index'])->name('wishlist.index');

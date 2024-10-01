@@ -98,4 +98,37 @@
 <div>
     <img src="{{ asset('storage/images/aboutus.png') }}" class="aboutus">
 </div>
+<script>
+    function searchComponent() {
+        return {
+            searchQuery: '',
+            showDropdown: false,
+            filteredItems: [],
+            items: [], // รายการทั้งหมดที่ได้จากการค้นหา
+            
+            async search() {
+                // เรียกค้นหาจาก API เมื่อ searchQuery มีความยาวมากกว่า 1 ตัวอักษร
+                if (this.searchQuery.length > 1) {
+                    const response = await fetch(`/search?q=${this.searchQuery}`);
+                    this.filteredItems = await response.json();
+                } else {
+                    this.filteredItems = [];
+                }
+            },
+            
+            selectItem(item) {
+                this.searchQuery = item.name;
+                this.showDropdown = false;
+            },
+            
+            hideDropdown() {
+                // Delay เล็กน้อยเพื่อให้ click event ทำงานก่อน dropdown ถูกซ่อน
+                setTimeout(() => {
+                    this.showDropdown = false;
+                }, 200);
+            }
+        };
+    }
+</script>
+
 </x-app-layout>
