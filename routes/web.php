@@ -8,6 +8,8 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\UserAddressController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\WishlistController;
+
 
 
 Route::get('/', function () {
@@ -47,9 +49,13 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile/address/create', [UserAddressController::class, 'form'])->name('address.form');
     Route::post('/profile/address', [UserAddressController::class, 'store'])->name('address.store');
     Route::delete('/profile/address/{id}', [UserAddressController::class, 'destroy'])->name('address.destroy');
-
     Route::get('/profile/address/{id}/edit', [UserAddressController::class, 'edit'])->name('address.edit');
     Route::put('/profile/address/{id}', [UserAddressController::class, 'update'])->name('address.update');
+
+    // wishlist
+    Route::get('/wishlist/{productId}', [WishListController::class, 'index'])->name('wishlist.index');
+    Route::post('/wishlist/{productId}', [WishlistController::class, 'toggleWishlist'])->name('wishlist.toggle');
+
 
 });
 
