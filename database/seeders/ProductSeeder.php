@@ -34,7 +34,7 @@ class ProductSeeder extends Seeder
                 'popularity' => 4,
             ],
             [
-                'name' => 'Danvers Carrots',
+                'name' => 'Danvers Carrot',
                 'image' => 'images/vegetable/แครอท.jpg', // Corrected path
                 'category_id' => 1,
                 'description' => 'a tapering orange-coloured root eaten as a vegetable:',
@@ -70,7 +70,7 @@ class ProductSeeder extends Seeder
                 'popularity' => 5,
             ],
             [
-                'name' => 'ํYardlong bean',
+                'name' => 'Yardlong bean',
                 'image' => 'images/vegetable/ถั่วฝักยาว.jpg', // Corrected path
                 'category_id' => 1, // Vegetables category
                 'description' => 'Yardlong beans, commonly known as long beans or Chinese long beans, are a type of legume widely popular in Asian cuisine.',
