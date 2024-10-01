@@ -18,7 +18,7 @@
 
 </style>
 <button type="submit" class="custom-button ml-96 pl-32">
-<a href="{{ route('products.index') }}">
+<a href="{{ route('summary.show') }}">
 
 <svg width="260" height="60" viewBox="0 0 260 60" fill="none" xmlns="http://www.w3.org/2000/svg">
                                     <rect class="button-background" width="186" height="60" rx="30" fill="#ACE094"/>
