@@ -12,7 +12,7 @@
 
         <!-- Input field -->
         <input type="text" name="quantity" id="quantity-input" data-input-counter aria-describedby="helper-text-explanation"
-            class="bg-white border-x-0 border-gray-300 h-11 text-center text-gray-900 text-sm focus:ring-blue-500 focus:border-blue-500 block w-full py-2.5"
+            class="bg-white border-x-0 border-gray-300 h-11 text-center text-gray-900 text-sm focus:ring-blue-500 focus:border-blue-500 block min-w-[50px] py-2.5"
             value="{{ $quantity }}" required />
 
         <!-- Increment button -->
