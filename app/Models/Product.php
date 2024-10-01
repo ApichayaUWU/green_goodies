@@ -45,4 +45,10 @@ class Product extends Model
     {
         return $this->hasMany(WishList::class, 'product_id');
     }
+
+    public function carts()
+    {
+        return $this->hasMany(Cart::class, 'product_id');
+    }
+
 }
