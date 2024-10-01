@@ -71,7 +71,7 @@
 
 <!-- Hero Section -->
 <div class="banner">
-    <a href="{{ route('products.index') }}">
+    <a href="{{ route('products.fruits') }}">
         <img src="{{ asset('storage/images/shopnow.png') }}" class="shopnow" alt="Shop Now">
     </a>
 </div>
