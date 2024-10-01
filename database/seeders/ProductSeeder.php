@@ -34,7 +34,7 @@ class ProductSeeder extends Seeder
                 'popularity' => 4,
             ],
             [
-                'name' => 'Carrot',
+                'name' => 'Danvers Carrot',
                 'image' => 'images/vegetable/แครอท.jpg', // Corrected path
                 'category_id' => 1,
                 'description' => 'a tapering orange-coloured root eaten as a vegetable:',
@@ -42,7 +42,15 @@ class ProductSeeder extends Seeder
                 'stock_quantity' => 75,
                 'popularity' => 4,
             ],
-            
+            [
+                'name' => 'Baby Carrot',
+                'image' => 'images/vegetable/เบบี้แครอท.jpg', 
+                'category_id' => 1,
+                'description' => 'little monk?',
+                'price' => 10,
+                'stock_quantity' => 100,
+                'popularity' => 5,
+            ],
             [
                 'name' => 'Japanese Bunching Onion',
                 'image' => 'images/vegetable/ต้นหอมญี่ปุ่น.jpg', // Corrected path
@@ -62,7 +70,7 @@ class ProductSeeder extends Seeder
                 'popularity' => 5,
             ],
             [
-                'name' => 'ํYardlong bean',
+                'name' => 'Yardlong bean',
                 'image' => 'images/vegetable/ถั่วฝักยาว.jpg', // Corrected path
                 'category_id' => 1, // Vegetables category
                 'description' => 'Yardlong beans, commonly known as long beans or Chinese long beans, are a type of legume widely popular in Asian cuisine.',
@@ -143,13 +151,40 @@ class ProductSeeder extends Seeder
                 'popularity' => 4,
             ],
             [
-                'name' => 'Chilli',
+                'name' => 'Red Spur Chili',
                 'image' => 'images/vegetable/พริก.jpg', // Corrected path
                 'category_id' => 1,
                 'description' => 'The Red Hot Chili Peppers are an American rock band formed in Los Angeles in 1982, comprising vocalist Anthony Kiedis, bassist Flea, drummer Chad Smith, and guitarist John Frusciante.',
                 'price' => 10,
                 'stock_quantity' => 111,
                 'popularity' => 4,
+            ],
+            [
+                'name' => 'Birds Eye Chili',
+                'image' => 'images/vegetable/พริกขี้หนู.jpg', 
+                'category_id' => 1,
+                'description' => 'Cultivated across Southeast Asia, it is used extensively in many Asian cuisines. ',
+                'price' => 10,
+                'stock_quantity' => 100,
+                'popularity' => 5,
+            ],
+            [
+                'name' => 'Jalapeño Chili',
+                'image' => 'images/vegetable/พริกจาลาปิโน่.jpg', 
+                'category_id' => 1,
+                'description' => 'The jalapeño is a medium-sized chili pepper pod type cultivar of the species Capsicum annuum. A mature jalapeño chili is 5–10 cm (2–4 in) long and 25–38 mm (1–1+1⁄2 in) wide, and hangs down from the plant.',
+                'price' => 10,
+                'stock_quantity' => 100,
+                'popularity' => 5,
+            ],
+            [
+                'name' => 'Sweet Chili',
+                'image' => 'images/vegetable/พริกหวาน.jpg', 
+                'category_id' => 1,
+                'description' => 'Sweet than your Ex',
+                'price' => 10,
+                'stock_quantity' => 100,
+                'popularity' => 5,
             ],
             [
                 'name' => 'Pumpkin',
@@ -167,6 +202,33 @@ class ProductSeeder extends Seeder
                 'description' => 'Rotten Tomatoes is an American review-aggregation website for film and television.',
                 'price' => 8,
                 'stock_quantity' => 90,
+                'popularity' => 5,
+            ],
+            [
+                'name' => 'Cherry Tomato',
+                'image' => 'images/vegetable/มะเขือเทศเชอร์รี่.jpg', 
+                'category_id' => 1,
+                'description' => 'It is tomato not Cherry.',
+                'price' => 20,
+                'stock_quantity' => 100,
+                'popularity' => 5,
+            ],
+            [
+                'name' => 'Black Krim Tomato',
+                'image' => 'images/vegetable/มะเขือเทศแบล็คคริม.jpg', 
+                'category_id' => 1,
+                'description' => 'Ma Khua test cream dam',
+                'price' => 13,
+                'stock_quantity' => 80,
+                'popularity' => 3,
+            ],
+            [
+                'name' => 'Grape Tomato',
+                'image' => 'images/vegetable/มะเขือเทศองุ่น.jpg', 
+                'category_id' => 1,
+                'description' => 'Try to guess whether it is a tomato or a grape.',
+                'price' => 10,
+                'stock_quantity' => 100,
                 'popularity' => 5,
             ],
             [
@@ -197,12 +259,48 @@ class ProductSeeder extends Seeder
                 'popularity' => 5, 
             ],
             [
-                'name' => 'Banana',
+                'name' => 'Cavendish Banana',
                 'image' => 'images/fruit/กล้วยหอม.jpg', // Corrected path
                 'category_id' => 2, // Fruits category
                 'description' => 'Ba-ba-ba-ba-ba-nana ba-ba-ba-ba-ba-nana banana-ah-ahhhhh (ba-ba-ba-ba-ba-nana) potato-ta-ah-ahhhhhhh (ba-ba-ba-ba-ba-nana) banana-ah-ahhhhhhh (ba-ba-ba-ba-ba-nana)',
                 'price' => 10,
                 'stock_quantity' => 100,
+                'popularity' => 5,
+            ],
+            [
+                'name' => 'Plantain Banana',
+                'image' => 'images/fruit/กล้วยดิบ.jpg', // Corrected path
+                'category_id' => 2, // Fruits category
+                'description' => 'raw banana hai lueang kon',
+                'price' => 12,
+                'stock_quantity' => 200,
+                'popularity' => 5,
+            ],
+            [
+                'name' => 'Lady Finger Banana',
+                'image' => 'images/fruit/กล้วยเล็บมือนาง.jpg', // Corrected path
+                'category_id' => 2, // Fruits category
+                'description' => 'her nail not my nail',
+                'price' => 15,
+                'stock_quantity' => 100,
+                'popularity' => 4,
+            ],
+            [
+                'name' => 'Namwa Banana',
+                'image' => 'images/fruit/กล้วยน้ำหว้า.jpg', // Corrected path
+                'category_id' => 2, // Fruits category
+                'description' => 'Nam Wa Mai Yak Kin Nam Wa',
+                'price' => 13,
+                'stock_quantity' => 90,
+                'popularity' => 5,
+            ],
+            [
+                'name' => 'Khai Banana',
+                'image' => 'images/fruit/กล้วยไข่.jpg', // Corrected path
+                'category_id' => 2, // Fruits category
+                'description' => 'It is not made by chickens.',
+                'price' => 10,
+                'stock_quantity' => 50,
                 'popularity' => 5,
             ],
             [
@@ -233,12 +331,30 @@ class ProductSeeder extends Seeder
                 'popularity' => 5,
             ],
             [
-                'name' => 'Durian',
+                'name' => 'Ganyao Durian',
                 'image' => 'images/fruit/ทุเรียน.jpg', // Corrected path
                 'category_id' => 2,
-                'description' => 'Strongly flavored durian',
+                'description' => 'But we have cut off the stems.',
                 'price' => 40,
                 'stock_quantity' => 15,
+                'popularity' => 3,
+            ],
+            [
+                'name' => 'Chanee Durian',
+                'image' => 'images/fruit/ทุเรียนชะนี.jpg', // Corrected path
+                'category_id' => 2,
+                'description' => 'Gibbons are apes in the family Hylobatidae (/ˌhaɪləˈbætɪdiː/). The family historically contained one genus, but now is split into four extant genera and 20 species. ',
+                'price' => 45,
+                'stock_quantity' => 10,
+                'popularity' => 3,
+            ],
+            [
+                'name' => 'Monthong Durian',
+                'image' => 'images/fruit/ทุเรียนหมอนทอง.jpg', // Corrected path
+                'category_id' => 2,
+                'description' => 'If you use it for your sleeping, you never wake up agian.',
+                'price' => 50,
+                'stock_quantity' => 25,
                 'popularity' => 3,
             ],
             [
@@ -272,10 +388,37 @@ class ProductSeeder extends Seeder
                 'name' => 'Kaeo Khamin SiThong Mango',
                 'image' => 'images/fruit/มะม่วงแก้วขมิ้นสีทอง.jpg', // Corrected path
                 'category_id' => 2,
-                'description' => 'MANGO Canvas',
-                'price' => 28,
+                'description' => 'Golden turmeric glass',
+                'price' => 30,
+                'stock_quantity' => 70,
+                'popularity' => 4,
+            ],
+            [
+                'name' => 'Nam Dok Mai Mango',
+                'image' => 'images/fruit/มะม่วงน้ำดอกไม้.jpg', // Corrected path
+                'category_id' => 2,
+                'description' => 'It is a mango grown and watered with flower nectar.',
+                'price' => 60,
                 'stock_quantity' => 60,
                 'popularity' => 5,
+            ],
+            [
+                'name' => 'Keo Savoy Mango',
+                'image' => 'images/fruit/มะม่วงเขียวเสวย.jpg', // Corrected path
+                'category_id' => 2,
+                'description' => 'MANGO Canvas',
+                'price' => 20,
+                'stock_quantity' => 60,
+                'popularity' => 5,
+            ],
+            [
+                'name' => 'Okrong Mango',
+                'image' => 'images/fruit/มะม่วงอกร่อง.jpg', // Corrected path
+                'category_id' => 2,
+                'description' => 'chest rift mango',
+                'price' => 500,
+                'stock_quantity' => 2,
+                'popularity' => 1,
             ],
             [
                 'name' => 'Papaya',

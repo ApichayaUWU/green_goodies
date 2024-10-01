@@ -13,7 +13,7 @@ class ProductController extends Controller
     //For displaying all products to users
     public function show()
     {
-        $products = Product::paginate(8);
+        $products = Product::paginate(10);
         return view('products.index', compact('products'));
     }
 
@@ -21,7 +21,7 @@ class ProductController extends Controller
     {
         $products = DB::table('product_categories as pc')
         ->join('products as p', 'p.category_id', '=', 'pc.id')
-        ->where('pc.id', 1)->paginate(8);
+        ->where('pc.id', 1)->paginate(10);
         return view('products.vegetables', compact('products'));
     }
 
@@ -29,8 +29,13 @@ class ProductController extends Controller
     {
         $products = DB::table('product_categories as pc')
         ->join('products as p', 'p.category_id', '=', 'pc.id')
-        ->where('pc.id', 2)->paginate(8);
+        ->where('pc.id', 2)->paginate(10);
         return view('products.fruits', compact('products'));
+    }
+
+    public function search($searchTerm){
+        $products = Product::where('name', 'like', '%' . $searchTerm)->paginate(10);
+        return view('products.index', compact('products'));
     }
 
     public function show_detail(Product $product)

@@ -45,7 +45,7 @@
             @if($products->isEmpty())
             <p>No products available at the moment.</p>
             @else
-            <div class="flex flex-row flex-wrap justify-center">
+            <div class="flex flex-row flex-wrap justify-center ">
                 @foreach ($products as $product)
                 <x-product-card :product="$product" :isHomePage="false" />
                 @endforeach

@@ -1,17 +1,17 @@
 <!-- Add to Cart Button -->
 <style>
 .custom-button {
-    border: none;
-    /* Remove default button border */
+    border: none; 
     background: transparent;
-    /* Make button background transparent */
     cursor: pointer;
-    /* Change cursor on hover */
+}
+
+.button-background {
+    transition: fill 0.3s ease;
 }
 
 .custom-button:hover .button-background {
-    fill: #FFFFFF;
-    /* Change this to your desired hover color */
+    fill: #FFFFFF; 
 }
 </style>
 <button type="submit" class="custom-button">
