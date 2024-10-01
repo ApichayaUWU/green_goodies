@@ -19,6 +19,16 @@ class WishListController extends Controller
         $wishlistItems = Wishlist::where('user_id', auth()->id())
             ->with('product') // Eager load the product
             ->get();
+        //return view('wishlist.index', compact('wishlistItems'));
+        return response()->json($wishlistItems);
+    }
+
+    public function show()
+    {
+        // Fetch cart items for the authenticated user
+        $wishlistItems = Wishlist::where('user_id', auth()->id())
+            ->with('product') // Eager load the product
+            ->get();
         return view('wishlist.index', compact('wishlistItems'));
     }
 

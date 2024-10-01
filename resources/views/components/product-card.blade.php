@@ -32,11 +32,11 @@
         </p>
     </div>
     <div class="flex flex-row flex-wrap justify-center pb-5 justify-self-end">
+        <x-heart-btn :productId="$product->id" />
         <form action="{{ route('cart.add', $product->id) }}" method="POST">
             @csrf
             <div class="flex flex-row gap-4">
-                <x-heart-btn/>
-                <!-- Add to Cart Button -->
+                 <!-- Add to Cart Button -->
                 <div class="hidden"><x-quantity-input /></div>
                 <x-add-to-cart />
             </div>

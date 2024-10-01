@@ -61,10 +61,10 @@ Route::middleware('auth')->group(function () {
     Route::get('/search', [SearchController::class, 'search']);
 
     // wishlist
-    Route::get('/wishlist/{productId}', [WishListController::class, 'index'])->name('wishlist.index');
+    Route::get('/wishlist/{productId}', [WishListController::class, 'show'])->name('wishlist.toggle');
     Route::post('/wishlist/{productId}', [WishlistController::class, 'toggleWishlist'])->name('wishlist.toggle');
-
-
+    Route::get('/wishlist', [WishListController::class, 'index'])->name('wishlist.index');
+    
 });
 
 require __DIR__.'/auth.php';
