@@ -7,15 +7,15 @@
         margin-right: 15px;
     }
     .home-card {
-        max-width: 250px;
-        min-width: 250px;
+        max-width: 300px;
+        min-width: 300px;
     }
 
     .products-card {
         max-width: 300px;
         min-width: 300px;
     }
-    img {
+    .img1 {
         width: 100%;
         height: 250px;
         object-fit: cover; 
@@ -26,7 +26,7 @@
     <div onclick="window.location='{{ route('products.detail', $product->id) }}'">
         {{-- Product Image --}}
         @if($product->image)
-            <img src="{{ asset('storage/' . $product->image) }}" alt="{{ $product->name }}" class="rounded-lg w-full object-cover my-3">
+            <img src="{{ asset('storage/' . $product->image) }}" alt="{{ $product->name }}" class="rounded-lg w-full object-cover my-3 img1">
         @else
             <span>No image</span>
         @endif
