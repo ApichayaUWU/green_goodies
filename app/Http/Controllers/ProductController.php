@@ -19,16 +19,16 @@ class ProductController extends Controller
 
     public function showVegetable()
     {
-        $products = DB::table('products as p')
-        ->join('product_categories as pc', 'p.category_id', '=', 'pc.id')
+        $products = DB::table('product_categories as pc')
+        ->join('products as p', 'p.category_id', '=', 'pc.id')
         ->where('pc.id', 1)->paginate(8);
         return view('products.vegetables', compact('products'));
     }
 
     public function showFruit()
     {
-        $products = DB::table('products as p')
-        ->join('product_categories as pc', 'p.category_id', '=', 'pc.id')
+        $products = DB::table('product_categories as pc')
+        ->join('products as p', 'p.category_id', '=', 'pc.id')
         ->where('pc.id', 2)->paginate(8);
         return view('products.fruits', compact('products'));
     }
