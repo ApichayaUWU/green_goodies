@@ -1,59 +1,132 @@
 <x-app-layout>
     <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Create My Address') }}
-        </h2>
+        <html>
+
+        <head>
+            <style>
+            h2 {
+                text-align: center;
+                color: #4C4343;
+            }
+
+            .input_address {
+                border-radius: 50px;
+                border: 1px solid #000000;
+                padding: 12px;
+                width: 400px;
+                height: 10px;
+            }
+
+            .input_city {
+                border-radius: 50px;
+                border: 1px solid #000000;
+                padding: 12px;
+                width: 100px;
+                height: 10px;
+            }
+
+            p {
+                font-weight: lighter;
+                margin-right: 10px;
+                margin-bottom: 15px;
+                margin-top: 3px;
+                color: #4C4343;
+            }
+
+            .box {
+                border-radius: 30px;
+                background: #F4EDDC;
+                padding: 12px;
+                width: auto;
+                height: auto;
+            }
+
+            .line {
+                position: absolute;
+                width: 1160px;
+                height: 0px;
+                left: auto;
+                top: 245px;
+                border: 1px solid #8A8A8A;
+            }
+            </style>
+        </head>
+
+        <body>
+            <div>
+                <h2 class="font-semibold text-xl text-gray-800 leading-tight ">
+                    {{ __('My Address') }}
+                </h2>
     </x-slot>
 
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-6">
-            <div class="p-4 sm:p-8 bg-white shadow sm:rounded-lg">
+            <div class="box">
                 <div class="max-w-full">
 
-    <form action="{{ route('address.store') }}" method="POST">
+                    <form action="{{ route('address.store') }}" method="POST">
                         @csrf
 
-    <!-- Add New Address -->
-    <div class="p-4 bg-gray-100 rounded-lg shadow-md">
-                                <h4 class="text-lg font-bold">Add New Address</h4>
+                        <!-- Add New Address -->
+                        <div class="box">
+                            <h4 class="text-lg font-bold mb-7">Address</h4>
+                            <div class="line"></div>
 
-                                <div class="mt-2">
-                                    <label for="new_address_line1" class="block text-sm font-medium text-gray-700">Address Line 1</label>
-                                    <input type="text" name="addresses[new][address_line1]" class="block w-full p-2 border rounded-md">
+                            <div class="flex flex-col">
+                                <div class="flex flex-row ">
+                                    <div class="">
+                                        <p> Address Line 1 : </p>
+                                    </div>
+                                    <div class="">
+                                        <input type="text" name="addresses[new][address_line1]" class="input_address">
+                                    </div>
                                 </div>
 
-                                <div class="mt-2">
-                                    <label for="new_address_line2" class="block text-sm font-medium text-gray-700">Address Line 2</label>
-                                    <input type="text" name="addresses[new][address_line2]" class="block w-full p-2 border rounded-md">
+                                <div class="flex flex-row ">
+                                    <div class="">
+                                        <p> Address Line 2 : </p>
+                                    </div>
+                                    <div class="">
+                                        <input type="text" name="addresses[new][address_line2]" class="input_address">
+                                    </div>
                                 </div>
 
-                                <div class="mt-2">
-                                    <label for="new_city" class="block text-sm font-medium text-gray-700">City</label>
-                                    <input type="text" name="addresses[new][city]" class="block w-full p-2 border rounded-md">
+                                <div class="flex flex-row ">
+                                    <div class="">
+                                        <p> City : </p>
+                                    </div>
+                                    <div class="">
+                                        <input type="text" name="addresses[new][city]" class="input_city">
+                                    </div>
                                 </div>
 
-                                <div class="mt-2">
-                                    <label for="new_district" class="block text-sm font-medium text-gray-700">District</label>
-                                    <input type="text" name="addresses[new][district]" class="block w-full p-2 border rounded-md">
+                                <div class="flex flex-row ">
+                                    <div class="">
+                                        <p> District : </p>
+                                    </div>
+                                    <div class="">
+                                        <input type="text" name="addresses[new][district]" class="input_city">
+                                    </div>
                                 </div>
 
-                                <div class="mt-2">
-                                    <label for="new_sub_district" class="block text-sm font-medium text-gray-700">Sub District</label>
-                                    <input type="text" name="addresses[new][sub_district]" class="block w-full p-2 border rounded-md">
+                                <div class="flex flex-row ">
+                                    <div class="">
+                                        <p> Sub District : </p>
+                                    </div>
+                                    <div class="">
+                                        <input type="text" name="addresses[new][sub_district]" class="input_city">
+                                    </div>
                                 </div>
                             </div>
-                        </div>
+                            <!-- Save Button -->
+                            <x-save-btn />
 
-                        <!-- Save Button -->
-                        <div class="mt-4">
-                            <x-primary-button>
-                                {{ __('Save Address') }}
-                            </x-primary-button>
                         </div>
-                    </form>
+                </div>
+                </form>
 
-                    </div>
             </div>
         </div>
+    </div>
     </div>
 </x-app-layout>
