@@ -1,5 +1,20 @@
 <nav x-data="{ open: false }" class="bg-white border-b border-gray-100">
     <style>
+    .dropdown-list {
+        position: absolute !important; /* ทำให้ dropdown แสดงอยู่เหนือคอนเทนต์อื่น */
+        background-color: white;
+        border: 1px solid #ddd;
+        width: 185%; /* ให้ dropdown กว้างเท่ากับ input */
+        max-height: 200px; /* กำหนดความสูงสูงสุด */
+        overflow-y: auto; /* เพิ่ม scroll ถ้า dropdown ยาวเกินไป */
+        z-index: 999; /* ทำให้ dropdown อยู่เหนือองค์ประกอบอื่น */
+        border-radius: 15px !important; /* Makes the corners rounded */
+    }
+    .dropdown-list li {
+        padding-left: 15px; 
+        padding-top: 10px; 
+        padding-left: 10px; 
+    }
     .logo {
         width: 250px;
         /* Adjust size as necessary */
@@ -43,11 +58,28 @@
         font-weight: bold;
         /* เทียบเท่า font-bold */
     }
+    input{
+        position: relative;
+        border-radius: 25px !important; /* Makes the corners rounded */
+        border: 3px solid #D0D0D0 !important; /* Optional border for a cleaner look */
+        padding: 10px 20px; /* Padding to make the search bar more spacious */
+        width: 200% !important; /* Make it responsive */
+    }
+    .boxinput{
+        padding-top : 15px !important;
+        padding-left: 20px;
+    }
+    .group{
+        padding-left: 680px;
+    }
+    input::placeholder {
+        color: #aaa; /* เปลี่ยนสีของ placeholder ที่นี่ */
+    }
     </style>
     <!-- Primary Navigation Menu -->
     <div class="header-height">
         <!-- Adjusted the height here -->
-        <div class="flex justify-between h-full">
+        <div class="flex items-center h-full">
             <div class="flex">
                 <!-- Logo -->
                 <div class="shrink-0 flex items-center logo-container">
@@ -58,8 +90,38 @@
 
             </div>
 
+            <div x-data="{ searchQuery: '', searchResults: [], open: false }" @click.away="open = false" class="relative boxinput ms-4">
+                <input type="text" x-model="searchQuery" @input="fetchSearchResults" @focus="open = true" placeholder="Search products..." class="w-full">
+                <ul x-show="open && searchResults.length > 0" class="dropdown-list">
+                    <template x-for="result in searchResults">
+                        <li>
+                            <a :href="`/products/${result.id}`" x-text="result.name"></a>
+                        </li>
+                    </template>
+                </ul>
+            </div>
+
+
+<script>
+    function fetchSearchResults() {
+        if (this.searchQuery.length > 0) {
+            fetch(`/search?q=${this.searchQuery}`)
+                .then(response => response.json())
+                .then(data => {
+                    this.searchResults = data;
+                    this.open = true;
+                });
+        } else {
+            this.searchResults = [];
+            this.open = false;
+        }
+    }
+</script>
+
+
+
             <!-- wishlist cart and username -->
-            <div class="hidden sm:flex sm:items-center sm:ms-6 space-x-4 nav-link-padding">
+            <div class="hidden sm:flex sm:items-center sm:ms-6 space-x-4 nav-link-padding group">
                 <!-- Wishlist and Cart with Icons -->
                 <x-nav-link class="custom-text-size">
                     <img src="{{ asset('storage/images/wishlist.png') }}" class="cart-wishlist ">

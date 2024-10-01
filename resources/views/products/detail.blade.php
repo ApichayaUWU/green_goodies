@@ -20,6 +20,10 @@
         color: #4C4343;
     }
 
+    h2 {
+        color: #4C4343;
+    }
+
     .imgProduct {
         border: 15px solid #C4B590;
         border-radius: 30px;
@@ -33,7 +37,7 @@
     </style>
 
     <div class="brownBg pt-6 pb-3 flex flex-row flex-wrap justify-center">
-        <h2 class="font-semibold text-4xl text-gray-800 leading-tight">
+        <h2 class="font-semibold text-4xl leading-tight">
             {{ __('Product Details') }}
         </h2>
     </div>

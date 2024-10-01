@@ -11,9 +11,12 @@
         .textColor{
             color: #4C4343;
         }
+        h2{
+            color : #4C4343;
+        }
     </style>
     <div class = "brownBg pt-6 pb-3 flex flex-row flex-wrap justify-center">
-        <h2 class="font-semibold text-4xl text-gray-800 leading-tight">
+        <h2 class="font-semibold text-4xl leading-tight">
             {{ __('Our Products') }}
         </h2>
     </div>

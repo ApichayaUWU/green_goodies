@@ -8,6 +8,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\UserAddressController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\SearchController;
 
 
 Route::get('/', function () {
@@ -51,6 +52,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile/address/{id}/edit', [UserAddressController::class, 'edit'])->name('address.edit');
     Route::put('/profile/address/{id}', [UserAddressController::class, 'update'])->name('address.update');
 
+    Route::get('/search', [SearchController::class, 'search']);
 });
 
 require __DIR__.'/auth.php';
