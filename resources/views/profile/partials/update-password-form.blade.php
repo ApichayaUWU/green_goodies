@@ -2,6 +2,11 @@
 
     <head>
         <style>
+        h1 {
+            margin-left: 25px;
+            color: #4C4343;
+        }
+
         .input {
             border-radius: 50px;
             border: 1px solid #000000;
@@ -37,7 +42,7 @@
     </head>
     <div class="box">
         <header>
-            <h1 class="text-lg font-medium text-gray-900">
+            <h1 class="text-lg font-medium ">
                 {{ __('Update Password') }}
             </h1>
 

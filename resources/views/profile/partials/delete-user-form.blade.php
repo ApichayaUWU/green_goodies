@@ -5,7 +5,6 @@
         h1 {
             margin-left: 25px;
             color: #4C4343;
-
         }
 
         h2 {

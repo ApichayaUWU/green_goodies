@@ -2,9 +2,12 @@
 
     <head>
         <style>
-        h2 {
+        /* h2 {
             text-align: center;
             color: #4C4343;
+        } */
+        .brownBg {
+            background-color: #F4EDDC;
         }
 
         .input_address {
@@ -44,16 +47,18 @@
             width: 1160px;
             height: 0px;
             left: auto;
-            top: 255px;
+            top: 295px;
             border: 1px solid #8A8A8A;
         }
         </style>
     </head>
-    <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+
+    <div class="brownBg pt-6 pb-3 flex flex-row flex-wrap justify-center">
+        <h2 class="font-semibold text-4xl text-gray-800 leading-tight">
             {{ __('Edit My Address') }}
         </h2>
-    </x-slot>
+    </div>
+
 
     <div class="">
         <div class="py-12">
