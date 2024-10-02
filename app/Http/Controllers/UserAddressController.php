@@ -60,6 +60,7 @@ class UserAddressController extends Controller
 
         // Validate the address input
         $request->validate([
+            'address_name'=>'required|string|max:100',
             'address_line1' => 'required|string|max:255',
             'address_line2' => 'nullable|string|max:255',
             'city' => 'required|string|max:100',
@@ -85,6 +86,7 @@ class UserAddressController extends Controller
 
         // Validate the address input
         $request->validate([
+            'addresses.*address_name' => 'required|string|max:100',
             'addresses.*.address_line1' => 'required|string|max:255',
             'addresses.*.address_line2' => 'nullable|string|max:255',
             'addresses.*.city' => 'required|string|max:100',
@@ -98,6 +100,7 @@ class UserAddressController extends Controller
                 // Create a new address
                 UserAddress::create([
                     'user_id' => $user->id,
+                    'address_name' => $addressData['address_name'],
                     'address_line1' => $addressData['address_line1'],
                     'address_line2' => $addressData['address_line2'],
                     'city' => $addressData['city'],
@@ -130,4 +133,5 @@ class UserAddressController extends Controller
 
         return Redirect::route('profile.edit')->with('status', 'address-deleted');
     }
+
 }

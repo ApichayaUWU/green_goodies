@@ -50,7 +50,8 @@
         <div class="line"></div>
         <div class="flex flex-row justify-between mt-4">
             <div class="flex flex-col ml-6">
-                <h4 class="text-lg mb-3 ">Address {{ $loop->iteration }}</h4>
+                <h4 class="text-lg mb-3 ">{{ $address->address_name }}</h4>
+                <p>Address {{ $loop->iteration }} </p>
                 <p><strong>Address Line 1:</strong> {{ $address->address_line1 }}</p>
                 <p><strong>Address Line 2:</strong> {{ $address->address_line2 }}</p>
                 <p><strong>City:</strong> {{ $address->city }}</p>

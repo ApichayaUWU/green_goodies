@@ -59,7 +59,7 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile/address/{id}', [UserAddressController::class, 'destroy'])->name('address.destroy');
     Route::get('/profile/address/{id}/edit', [UserAddressController::class, 'edit'])->name('address.edit');
     Route::put('/profile/address/{id}', [UserAddressController::class, 'update'])->name('address.update');
-
+    
     // search bar
     Route::get('/search', [SearchController::class, 'search']);
 

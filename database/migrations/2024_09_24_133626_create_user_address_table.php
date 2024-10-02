@@ -15,6 +15,8 @@ return new class extends Migration
             $table->foreignId('user_id') // Foreign key to users table
                 ->constrained('users')
                 ->onDelete('cascade'); // Automatically delete address if user is deleted
+            
+            $table->string('address_name');
             $table->string('address_line1'); // First line of the address
             $table->string('address_line2')->nullable(); // Second line of the address, optional
             $table->string('city'); // City of the user

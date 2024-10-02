@@ -18,6 +18,7 @@ class UserAddress extends Model
      */
     protected $fillable = [
         'user_id',        // Foreign key referencing users table
+        'address_name',
         'address_line1',
         'address_line2',
         'city',

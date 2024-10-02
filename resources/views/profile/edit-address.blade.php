@@ -83,6 +83,15 @@
                                 <div class="space-y-4">
                                     <div class="flex flex-row ">
                                         <div class="">
+                                            <p> Address name : </p>
+                                        </div>
+                                        <div class="">
+                                            <input type="text" name="address_name" value="{{ $address->address_name }}"
+                                                class="input_address">
+                                        </div>
+                                    </div>
+                                    <div class="flex flex-row ">
+                                        <div class="">
                                             <p> Address Line 1 : </p>
                                         </div>
                                         <div class="">
