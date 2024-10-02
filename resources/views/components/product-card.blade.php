@@ -7,7 +7,6 @@
     margin-right: 15px;
 }
 
-
 .home-card {
     max-width: 300px;
     min-width: 300px;
@@ -29,10 +28,9 @@
     object-fit: cover;
 }
 </style>
-
-<div class="card {{ $isHomePage ? 'home-card' : 'products-card' }} bg-white border rounded-lg shadow-md px-6 m-3 flex-col">
-<div onclick="window.location.href='{{ route('products.detail', $product->id) }}'">
-
+<div
+    class="card {{ $isHomePage ? 'home-card' : 'products-card' }} bg-white border rounded-lg shadow-md px-6 m-3 flex-col">
+    <div onclick="window.location='{{ route('products.detail', $product->id) }}'">
         {{-- Product Image --}}
         @if($product->image)
         <img src="{{ asset('storage/' . $product->image) }}" alt="{{ $product->name }}"
@@ -47,33 +45,23 @@
             ${{ number_format($product->price, 2) }}
         </p>
     </div>
-
-    
-    @if(Auth::user())
-        @if($product->stock_quantity > 0)
-            <div class="flex flex-row flex-wrap justify-center pb-5 justify-self-end">
-                <x-heart-btn :productId="$product->id" />
-                <form action="{{ route('cart.add', $product->id) }}" method="POST">
-                    @csrf
-                    <div class="flex flex-row gap-4">
-                        <!-- Add to Cart Button -->
-                        <div class="hidden">
-                            <x-quantity-input />
-                        </div>
-                        <x-add-to-cart />
-                    </div>
-                </form>
+    @if($product->stock_quantity > 0)
+    <div class="flex flex-row flex-wrap justify-center pb-5 justify-self-end">
+        <x-heart-btn :productId="$product->id" />
+        <form action="{{ route('cart.add', $product->id) }}" method="POST">
+            @csrf
+            <div class="flex flex-row gap-4">
+                <!-- Add to Cart Button -->
+                <div class="hidden">
+                    <x-quantity-input />
+                </div>
+                <x-add-to-cart />
             </div>
-        @else
-            <div class="text-center">
-
-                <p class="text-xl textColor pt-2"><strong>- Sold out. -</strong></p>
-            </div>
-        @endif
+        </form>
+    </div>
+    @else
+    <div class="text-center">
+        <p class="text-xl textColor pt-2"><strong>- Sold out. -</strong></p>
+    </div>
     @endif
 </div>
-
-    
-</div>
-
-
