@@ -7,6 +7,7 @@
     margin-right: 15px;
 }
 
+
 .home-card {
     max-width: 300px;
     min-width: 300px;
@@ -31,6 +32,7 @@
 
 <div class="card {{ $isHomePage ? 'home-card' : 'products-card' }} bg-white border rounded-lg shadow-md px-6 m-3 flex-col">
 <div onclick="window.location.href='{{ route('products.detail', $product->id) }}'">
+
         {{-- Product Image --}}
         @if($product->image)
         <img src="{{ asset('storage/' . $product->image) }}" alt="{{ $product->name }}"
@@ -64,11 +66,13 @@
     </div>
     @else
     <div class="text-center">
-        <p class="pt-5 text-xl textColor "><strong>- Sold out. -</strong></p>
+
+        <p class="text-xl textColor pt-2"><strong>- Sold out. -</strong></p>
     </div>
     @endif
 </div>
 
     @endif
 </div>
+
 
