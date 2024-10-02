@@ -13,7 +13,22 @@
             border-color: #ACE094; /* Change to your desired color on focus */
             outline: none; /* Remove default outline */
         }
+
+        .register {
+            text-decoration: underline; /* Underline for link */
+            color: #4A5568; /* Link color */
+            transition: color 0.3s; /* Smooth transition for color */
+        }
+
+        .register:hover {
+            color: #2B6CB0; /* Change color on hover */
+        }
+        .if{
+            padding-left: 60px;
+            padding-top: 10px;
+        }
     </style>
+    
     <form method="POST" action="{{ route('login') }}">
         @csrf
 
@@ -27,12 +42,10 @@
         <!-- Password -->
         <div class="mt-4">
             <x-input-label for="password" :value="__('Password')" />
-
             <x-text-input id="password" class="custom-input block mt-1 w-full"
                             type="password"
                             name="password"
                             required autocomplete="current-password" />
-
             <x-input-error :messages="$errors->get('password')" class="mt-2" />
         </div>
 
@@ -56,4 +69,7 @@
             </x-primary-button>
         </div>
     </form>
+    
+    <div class="text-sm if">If you don't have an account, please <a href="{{ route('register') }}" class="register">register</a>.</div>
+
 </x-guest-layout>
