@@ -1,42 +1,42 @@
 <style>
-    .card {
-        border-radius: 10px;
-        overflow: hidden;
-        box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
-        background-color: #EFEFEF;
-        margin-right: 15px;
-    }
-    .home-card {
-        max-width: 300px;
-        min-width: 300px;
-    }
+.card {
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+    background-color: #EFEFEF;
+    margin-right: 15px;
+}
 
-    .products-card {
-        max-width: 300px;
-        min-width: 300px;
-    }
+.home-card {
+    max-width: 300px;
+    min-width: 300px;
+}
 
-    .wl{
-        margin-right: 35px;
-        margin-top: 3px;
-    }
+.products-card {
+    max-width: 300px;
+    min-width: 300px;
+}
 
-    .img1 {
-        width: 100%;
-        height: 250px;
-        object-fit: cover; 
-    }
+.wl {
+    margin-right: 35px;
+    margin-top: 3px;
+}
 
-
+.img1 {
+    width: 100%;
+    height: 250px;
+    object-fit: cover;
+}
 </style>
+
 <div class="card {{ $isHomePage ? 'home-card' : 'products-card' }} bg-white border rounded-lg shadow-md px-6 m-3 flex-col">
 <div onclick="window.location.href='{{ route('products.detail', $product->id) }}'">
-
         {{-- Product Image --}}
         @if($product->image)
-            <img src="{{ asset('storage/' . $product->image) }}" alt="{{ $product->name }}" class="rounded-lg w-full object-cover my-3 img1">
+        <img src="{{ asset('storage/' . $product->image) }}" alt="{{ $product->name }}"
+            class="rounded-lg w-full object-cover my-3 img1">
         @else
-            <span>No image</span>
+        <span>No image</span>
         @endif
         <h2 class="text-2xl font-semibold textColor truncate">
             {{ $product->name }}
@@ -45,17 +45,30 @@
             ${{ number_format($product->price, 2) }}
         </p>
     </div>
+
+    @if($product->stock_quantity > 0)
     @if(Auth::user())
+
     <div class="flex flex-row flex-wrap justify-center pb-5 justify-self-end">
         <x-heart-btn :productId="$product->id" />
         <form action="{{ route('cart.add', $product->id) }}" method="POST">
             @csrf
             <div class="flex flex-row gap-4">
-                 <!-- Add to Cart Button -->
-                <div class="hidden"><x-quantity-input /></div>
+                <!-- Add to Cart Button -->
+                <div class="hidden">
+                    <x-quantity-input />
+                </div>
                 <x-add-to-cart />
             </div>
         </form>
     </div>
+    @else
+    <div class="text-center">
+        <p class="pt-5 text-xl textColor "><strong>- Sold out. -</strong></p>
+    </div>
     @endif
 </div>
+
+    @endif
+</div>
+

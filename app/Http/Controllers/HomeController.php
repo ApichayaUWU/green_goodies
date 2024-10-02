@@ -14,6 +14,7 @@ class HomeController extends Controller
     {
 
         // Fetch products ordered by popularity (descending), limit to top 5 for example
+        // $popularProducts = Product::where('stock_quantity', '>', 0)->orderBy('popularity', 'desc')->limit(10)->get(); 
         $popularProducts = Product::orderBy('popularity', 'desc')->limit(10)->get(); 
 
         if($user = Auth::user()){
@@ -22,6 +23,7 @@ class HomeController extends Controller
             'popularProducts' => $popularProducts, // Pass the popular products to the view
             ]);
         }
+
 
         // Return the view with the products
         return view('guest_home', [

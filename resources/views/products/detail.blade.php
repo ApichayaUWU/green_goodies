@@ -34,8 +34,9 @@
     .DetailProduct {
         width: 661px;
     }
-    .wishlist{
-        margin-top : 8px;
+
+    .wishlist {
+        margin-top: 8px;
     }
     </style>
 
@@ -67,6 +68,8 @@
                 <p class="pt-5">{{ $product->description }}</p>
                 <p class="pt-5 text-xl"><strong>in stock:</strong> {{ $product->stock_quantity }}</p>
 
+                @if($product->stock_quantity > 0)
+
                 <div class="flex flex-row gap-4 py-6">
                     <!-- Add to Cart Form -->
                     <form action="{{ route('cart.add', $product->id) }}" method="POST">
@@ -75,26 +78,35 @@
                             <!-- Include Quantity Input Blade Component -->
                             <x-quantity-input />
 
-                            <x-add-to-cart/>
-                            
+                            <x-add-to-cart />
+
                         </div>
                     </form>
 
                     <x-heart-btn :productId="$product->id" />
                 </div>
+                @else
+                <div class="bg-[#b95846] text-center w-[180px] rounded-[20px] my-10">
+                    <p class="pt-5 text-xl text-white  p-2"><strong>- Sold out. -</strong></p>
+                </div>
+                @endif
             </div>
         </div>
     </div>
 
 
 
-<script>
-    document.addEventListener('DOMContentLoaded', function () {
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
         // Get the decrement button, increment button, and quantity input
         const decrementButton = document.querySelector('[data-input-counter-decrement="quantity-input"]');
         const incrementButton = document.querySelector('[data-input-counter-increment="quantity-input"]');
         const quantityInput = document.querySelector('[data-input-counter]');
-        const maxStock = {{ $product->stock_quantity ? $product->stock_quantity : 0 }}; // Replace with your actual stock value if needed
+        const maxStock = {
+            {
+                $product - > stock_quantity ? $product - > stock_quantity : 0
+            }
+        }; // Replace with your actual stock value if needed
 
         // Function to update the quantity
         const updateQuantity = (newQuantity) => {
@@ -109,22 +121,22 @@
         };
 
         // Event listener for decrement button
-        decrementButton.addEventListener('click', function () {
+        decrementButton.addEventListener('click', function() {
             const currentQuantity = parseInt(quantityInput.value) || 1;
             updateQuantity(currentQuantity - 1);
         });
 
         // Event listener for increment button
-        incrementButton.addEventListener('click', function () {
+        incrementButton.addEventListener('click', function() {
             const currentQuantity = parseInt(quantityInput.value) || 1;
             updateQuantity(currentQuantity + 1);
         });
 
         // Ensure input is within limits when manually typed
-        quantityInput.addEventListener('input', function () {
+        quantityInput.addEventListener('input', function() {
             const currentQuantity = parseInt(quantityInput.value) || 1;
             updateQuantity(currentQuantity);
         });
     });
-</script>
+    </script>
 </x-app-layout>
