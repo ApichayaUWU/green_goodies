@@ -100,11 +100,8 @@
         const decrementButton = document.querySelector('[data-input-counter-decrement="quantity-input"]');
         const incrementButton = document.querySelector('[data-input-counter-increment="quantity-input"]');
         const quantityInput = document.querySelector('[data-input-counter]');
-        const maxStock = {
-            {
-                $product - > stock_quantity ? $product - > stock_quantity : 0
-            }
-        }; // Replace with your actual stock value if needed
+        const maxStock = {{ $product->stock_quantity ? $product->stock_quantity : 0 }};
+        // Replace with your actual stock value if needed
 
         // Function to update the quantity
         const updateQuantity = (newQuantity) => {
