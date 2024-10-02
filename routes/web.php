@@ -18,12 +18,29 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-// Replace the old home route with this one
-Route::get('/home', [HomeController::class, 'popular'])->middleware(['auth', 'verified'])->name('home');
+// home with popular
+Route::get('/home', [HomeController::class, 'popular'])->name('home');
 
-Route::resource('products', ProductController::class);
+
+// category search
+Route::get('/categore/{searchTerm}', [ProductController::class, 'search'])->name('products.search');
+
+// route to /products show for users
+Route::get('/products', [ProductController::class, 'show'])->name('products.index');
+
+// fruit and vegetable
+Route::get('/vegetables', [ProductController::class, 'showVegetable'])->name('products.vegetables');
+Route::get('/fruits', [ProductController::class, 'showFruit'])->name('products.fruits');
+
+// search bar
+Route::get('/search', [SearchController::class, 'search']);
+
+// detail of each product
+Route::get('/products/{product}', [ProductController::class, 'show_detail'])->name('products.detail');
+
 
 Route::middleware('auth')->group(function () {
+    
     // profile form
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
@@ -32,20 +49,11 @@ Route::middleware('auth')->group(function () {
     // profile photo of user
     Route::post('/profile/photo/update', [UserController::class, 'updateProfilePhoto'])->name('profile.photo.update');
     
-    // route to /products show for users
-    Route::get('/products', [ProductController::class, 'show'])->name('products.index');
-    // fruit and vegetable
-    Route::get('/vegetables', [ProductController::class, 'showVegetable'])->name('products.vegetables');
-    Route::get('/fruits', [ProductController::class, 'showFruit'])->name('products.fruits');
-    
-    Route::get('/categore/{searchTerm}', [ProductController::class, 'search'])->name('products.search');
-
     // admin only
     Route::get('/products/create', [ProductController::class, 'form'])->name('products.form');
     Route::post('/products/create', [ProductController::class, 'store'])->name('products.form');
     
-    // detail of each product
-    Route::get('/products/{product}', [ProductController::class, 'show_detail'])->name('products.detail');
+    // add to cart for detail page
     Route::post('/products/{product}', [CartController::class, 'addToCart'])->name('cart.add');
 
     // user's cart
@@ -59,9 +67,6 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile/address/{id}', [UserAddressController::class, 'destroy'])->name('address.destroy');
     Route::get('/profile/address/{id}/edit', [UserAddressController::class, 'edit'])->name('address.edit');
     Route::put('/profile/address/{id}', [UserAddressController::class, 'update'])->name('address.update');
-    
-    // search bar
-    Route::get('/search', [SearchController::class, 'search']);
 
     // wishlist
     Route::get('/wishlist/{productId}', [WishListController::class, 'show'])->name('wishlist.toggle');
@@ -73,7 +78,7 @@ Route::middleware('auth')->group(function () {
     Route::post('/add-sale', [SummaryController::class, 'add_sale'])->name('add.sale');
     //Route::get('/summarylog', [SummaryController::class, 'showlog'])->name('summary.show');
     Route::get('/order-success', [SummaryController::class, 'orderSuccess'])->name('order_success');
-
+    
 });
 
 require __DIR__.'/auth.php';

@@ -13,6 +13,19 @@
             border-color: #ACE094; /* Change to your desired color on focus */
             outline: none; /* Remove default outline */
         }
+        .login {
+            text-decoration: underline; /* Underline for link */
+            color: #4A5568; /* Link color */
+            transition: color 0.3s; /* Smooth transition for color */
+        }
+
+        .login:hover {
+            color: #2B6CB0; /* Change color on hover */
+        }
+        .if{
+            padding-left: 90px;
+            padding-top: 20px;
+        }
     </style>
 
     <form method="POST" action="{{ route('register') }}">
@@ -56,4 +69,5 @@
             </x-primary-button>
         </div>
     </form>
+    <div class="text-sm if">If you have an account, please <a href="{{ route('login') }}" class="login">log in</a>.</div>
 </x-guest-layout>

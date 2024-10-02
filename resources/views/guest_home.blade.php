@@ -69,7 +69,6 @@
         overflow-x: auto; /* Enables horizontal scrolling */
         white-space: nowrap; /* Prevents wrapping of items */
         -webkit-overflow-scrolling: touch; /* Makes scrolling smooth on touch devices */
-        margin-top: 20px;
     }
 
     .products-container::-webkit-scrollbar {

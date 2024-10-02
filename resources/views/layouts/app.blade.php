@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    <title>{{ config('app.name', 'GreenGoodies') }}</title>
 
     <style>
         /* Remove bottom margin/padding to ensure no space between content and footer */
@@ -19,6 +19,7 @@
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+            
         }
 
         /* Flexbox layout to ensure footer stays at the bottom */
@@ -59,7 +60,7 @@
     </main>
 
     <!-- Footer -->
-    <footer class="bg-[#EADAB3] w-full py-6 no-gap">
+    <footer class="bg-[#E7DFCB] w-full py-6 no-gap">
         <div class="flex justify-center items-center">
             <div class="max-w-7xl w-full px-4 flex justify-between items-center">
                 <!-- Logo and slogan -->
