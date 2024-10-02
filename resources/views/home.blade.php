@@ -74,6 +74,16 @@
     .products-container::-webkit-scrollbar {
         display: none; /* Hide the scrollbar */
     }
+    .cat-container {
+    max-width: 100vw; /* เพิ่ม max-width */
+    overflow-x: auto;
+    white-space: nowrap;
+}
+
+    .cat-container::-webkit-scrollbar {
+        display: none; /* Hide the scrollbar */
+    }
+    
 </style>
 
 <!-- Hero Section -->
@@ -97,14 +107,16 @@
 <!-- Featured Categories -->
     <div class="featured flex justify-center flex-col">
         <x-Featured-Home />
-        <div class="flex flex-row justify-around mt-32 space-x-24">
-            <!-- Category Icons -->
-                <x-Banana-Home />
-                <x-Durains-Home />
-                <x-Mangoes-Home />
-                <x-Tomatoes-Home />
-                <x-Chilli-Home />
-                <x-Carrot-Home />
+        <div class="cat-container">
+            <div class="flex flex-row justify-around mt-32 space-x-24" style = "margin-top: 150px">
+                <!-- Category Icons -->
+                    <x-Banana-Home />
+                    <x-Durains-Home />
+                    <x-Mangoes-Home />
+                    <x-Tomatoes-Home />
+                    <x-Chilli-Home />
+                    <x-Carrot-Home />
+            </div>
         </div>
     </div>
 <!-- About Us Section -->
