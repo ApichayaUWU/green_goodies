@@ -69,4 +69,25 @@ class CartController extends Controller
 
         return back()->with('success', 'Product added to cart successfully!');
     }
+
+    public function updateAll(Request $request)
+    {
+        $quantities = $request->input('quantities');
+
+        foreach ($quantities as $cartItemId => $quantity) {
+            $cartItem = Cart::find($cartItemId);
+            if ($cartItem) {
+                if($quantity == 0) {
+                    
+                    $cartItem->delete();
+                }else{
+                    $cartItem->quantity = $quantity;
+                    $cartItem->save();
+                }
+            }
+        }
+
+        return redirect()->route('summary.show');
+    }
+
 }

@@ -59,6 +59,8 @@ Route::middleware('auth')->group(function () {
     // user's cart
     Route::get('/cart', [CartController::class, 'showCart'])->name('cart.show');
     Route::delete('/cart/{id}', [CartController::class, 'removeFromCart'])->name('cart.remove');
+    Route::put('/cart/update-all', [CartController::class, 'updateAll'])->name('cart.update.all');
+
 
     // user address
     Route::get('/profile/address', [UserAddressController::class, 'index'])->name('address.index');
