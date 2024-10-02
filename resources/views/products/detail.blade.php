@@ -67,7 +67,9 @@
                 </svg>
                 <p class="pt-5">{{ $product->description }}</p>
                 <p class="pt-5 text-xl"><strong>in stock:</strong> {{ $product->stock_quantity }}</p>
+                
                 @if($product->stock_quantity > 0)
+
                 <div class="flex flex-row gap-4 py-6">
                     <!-- Add to Cart Form -->
                     <form action="{{ route('cart.add', $product->id) }}" method="POST">
@@ -82,10 +84,10 @@
                     </form>
                     <x-heart-btn :productId="$product->id" />
                 </div>
-
                 @else
                 <div class="bg-[#b95846] text-center w-[180px] rounded-[20px] my-10">
                     <p class="pt-5 text-xl text-white p-2"><strong>- Sold out. -</strong></p>
+
                 </div>
                 @endif
             </div>
@@ -100,6 +102,7 @@
         const decrementButton = document.querySelector('[data-input-counter-decrement="quantity-input"]');
         const incrementButton = document.querySelector('[data-input-counter-increment="quantity-input"]');
         const quantityInput = document.querySelector('[data-input-counter]');
+
         const maxStock = {{ $product->stock_quantity ? $product->stock_quantity : 0 }};
         // Replace with your actual stock value if needed
 
