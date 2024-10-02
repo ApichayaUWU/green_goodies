@@ -142,7 +142,7 @@
     </nav>
   @endif
   <nav>
-  <a href="{{ route('login') }}" class="catalog">
+  <a href="{{ route('home') }}" class="catalog">
     <img src="{{ asset('storage/images/catalog.png') }}" alt="Catalog" class="catalog-img">
   </a>
 </nav>

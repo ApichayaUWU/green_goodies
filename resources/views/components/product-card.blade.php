@@ -48,31 +48,32 @@
         </p>
     </div>
 
-    @if($product->stock_quantity > 0)
+    
     @if(Auth::user())
-
-    <div class="flex flex-row flex-wrap justify-center pb-5 justify-self-end">
-        <x-heart-btn :productId="$product->id" />
-        <form action="{{ route('cart.add', $product->id) }}" method="POST">
-            @csrf
-            <div class="flex flex-row gap-4">
-                <!-- Add to Cart Button -->
-                <div class="hidden">
-                    <x-quantity-input />
-                </div>
-                <x-add-to-cart />
+        @if($product->stock_quantity > 0)
+            <div class="flex flex-row flex-wrap justify-center pb-5 justify-self-end">
+                <x-heart-btn :productId="$product->id" />
+                <form action="{{ route('cart.add', $product->id) }}" method="POST">
+                    @csrf
+                    <div class="flex flex-row gap-4">
+                        <!-- Add to Cart Button -->
+                        <div class="hidden">
+                            <x-quantity-input />
+                        </div>
+                        <x-add-to-cart />
+                    </div>
+                </form>
             </div>
-        </form>
-    </div>
-    @else
-    <div class="text-center">
+        @else
+            <div class="text-center">
 
-        <p class="text-xl textColor pt-2"><strong>- Sold out. -</strong></p>
-    </div>
+                <p class="text-xl textColor pt-2"><strong>- Sold out. -</strong></p>
+            </div>
+        @endif
     @endif
 </div>
 
-    @endif
+    
 </div>
 
 
