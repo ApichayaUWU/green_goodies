@@ -47,7 +47,7 @@ public function add_sale(Request $request)
     // Start a database transaction
     DB::beginTransaction();
 
-    // try {
+    try {
         // Generate a unique order ID
         $orderId = $user->id . rand(10, 99);
 
@@ -79,12 +79,12 @@ public function add_sale(Request $request)
 
         return redirect()->route('order_success')->with('success', 'Sale order added successfully! Your Order ID: ' . $orderId);
 
-    // } catch (\Exception $e) {
-    //     // Rollback the transaction in case of error
-    //     DB::rollBack();
+    } catch (\Exception $e) {
+        // Rollback the transaction in case of error
+        DB::rollBack();
 
-    //     return back()->with('error', 'Failed to process the sale order: ' . $e->getMessage());
-    // }
+        return back()->with('error', 'Failed to process the sale order: ' . $e->getMessage());
+    }
 }
 
 public function orderSuccess()

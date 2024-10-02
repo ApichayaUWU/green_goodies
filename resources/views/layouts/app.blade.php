@@ -19,6 +19,7 @@
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+            
         }
 
         /* Flexbox layout to ensure footer stays at the bottom */
