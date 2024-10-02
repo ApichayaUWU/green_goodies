@@ -60,7 +60,7 @@
     </main>
 
     <!-- Footer -->
-    <footer class="bg-[#EADAB3] w-full py-6 no-gap">
+    <footer class="bg-[#E7DFCB] w-full py-6 no-gap">
         <div class="flex justify-center items-center">
             <div class="max-w-7xl w-full px-4 flex justify-between items-center">
                 <!-- Logo and slogan -->
