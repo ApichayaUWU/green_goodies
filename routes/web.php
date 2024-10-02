@@ -68,7 +68,6 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile/address/{id}/edit', [UserAddressController::class, 'edit'])->name('address.edit');
     Route::put('/profile/address/{id}', [UserAddressController::class, 'update'])->name('address.update');
 
-
     // wishlist
     Route::get('/wishlist/{productId}', [WishListController::class, 'show'])->name('wishlist.toggle');
     Route::post('/wishlist/{productId}', [WishlistController::class, 'toggleWishlist'])->name('wishlist.toggle');

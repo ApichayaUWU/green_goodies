@@ -82,6 +82,15 @@
                                 <div class="flex flex-col">
                                     <div class="flex flex-row ">
                                         <div class="">
+                                            <p> Address name : </p>
+                                        </div>
+                                        <div class="">
+                                            <input type="text" name="addresses[new][address_name]"
+                                                class="input_address">
+                                        </div>
+                                    </div>
+                                    <div class="flex flex-row ">
+                                        <div class="">
                                             <p> Address Line 1 : </p>
                                         </div>
                                         <div class="">
