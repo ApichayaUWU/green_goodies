@@ -30,7 +30,8 @@
 
 </style>
 <div class="card {{ $isHomePage ? 'home-card' : 'products-card' }} bg-white border rounded-lg shadow-md px-6 m-3 flex-col">
-    <div onclick="window.location='{{ route('products.detail', $product->id) }}'">
+<div onclick="window.location.href='{{ route('products.detail', $product->id) }}'">
+
         {{-- Product Image --}}
         @if($product->image)
             <img src="{{ asset('storage/' . $product->image) }}" alt="{{ $product->name }}" class="rounded-lg w-full object-cover my-3 img1">
@@ -44,6 +45,7 @@
             ${{ number_format($product->price, 2) }}
         </p>
     </div>
+    @if(Auth::user())
     <div class="flex flex-row flex-wrap justify-center pb-5 justify-self-end">
         <x-heart-btn :productId="$product->id" />
         <form action="{{ route('cart.add', $product->id) }}" method="POST">
@@ -55,4 +57,5 @@
             </div>
         </form>
     </div>
+    @endif
 </div>
