@@ -83,6 +83,17 @@
       content: url('{{ asset('storage/images/shopnowhovered.png') }}');
     }
 
+    nav a.catalog img {
+      content: url('{{ asset('storage/images/catalog.png') }}');
+      width: 150px !important; /* Set specific width for shop now button */
+      height: auto !important; /* Maintain aspect ratio */
+      margin-top:-10px !important;
+    }
+
+    nav a.catalog:hover img {
+      content: url('{{ asset('storage/images/cataloghovered.png') }}');
+    }
+
     .corner-image1 {
       position: absolute;
       width: 350px;
@@ -130,7 +141,11 @@
       @endauth
     </nav>
   @endif
-  
+  <nav>
+  <a href="{{ route('login') }}" class="catalog">
+    <img src="{{ asset('storage/images/catalog.png') }}" alt="Catalog" class="catalog-img">
+  </a>
+</nav>
   <h5>Please log in before shopping. If you don't have an account, please register.</h5>
 
   <img src="{{ asset('storage/images/component1.png') }}" alt="Corner Left" class="corner-image1 bottom-left">
