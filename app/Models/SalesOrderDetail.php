@@ -20,6 +20,7 @@ class SalesOrderDetail extends Model
         'order_id',        // The ID of the order this detail belongs to
         'customer_id',     // Foreign key referencing users table
         'product_id',      // Foreign key referencing products table
+        'address_id',      // Foreign key referencing address table
         'quantity',        // Quantity of the product
         'total_price',     // Total price for this line item
     ];
@@ -38,5 +39,9 @@ class SalesOrderDetail extends Model
     public function user()
     {
         return $this->belongsTo(User::class, 'customer_id');
+    }
+
+    public function address(){
+        return $this->belongsTo(UserAddress::class, 'address_id');
     }
 }
