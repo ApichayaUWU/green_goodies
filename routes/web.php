@@ -80,7 +80,9 @@ Route::middleware('auth')->group(function () {
     Route::post('/add-sale', [SummaryController::class, 'add_sale'])->name('add.sale');
     //Route::get('/summarylog', [SummaryController::class, 'showlog'])->name('summary.show');
     Route::get('/order-success', [SummaryController::class, 'orderSuccess'])->name('order_success');
-    
+
+    // custoomer's order
+    Route::get('/order', [SummaryController::class, 'order_summary'])->name('summary.order');
 });
 
 require __DIR__.'/auth.php';

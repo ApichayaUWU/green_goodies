@@ -59,6 +59,7 @@
         padding-bottom: 7px;
         padding-right: 5px;
     }
+    
 
     .custom-text-size {
         font-size: 1.1rem;
@@ -142,6 +143,10 @@
             <!-- wishlist cart and username -->
             <div class="hidden sm:flex sm:items-center sm:ms-6 space-x-4 nav-link-padding group">
                 <!-- Wishlist and Cart with Icons -->
+                <x-nav-link :href="route('summary.order')" class="custom-text-size min-w-[50px]">
+                    <img src="{{ asset('storage/images/wishlist.png') }}" class="cart-wishlist ">
+                    {{ __('MyOrder') }}
+                </x-nav-link>
                 <x-nav-link :href="route('wishlist.index')" class="custom-text-size">
                     <img src="{{ asset('storage/images/wishlist.png') }}" class="cart-wishlist ">
                     {{ __('Wishlist') }}

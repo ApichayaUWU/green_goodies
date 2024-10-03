@@ -78,11 +78,11 @@ class CartController extends Controller
             $cartItem = Cart::find($cartItemId);
             if ($cartItem) {
                 if($quantity == 0) {
-                    
+                    // delete when quantity input == 0
                     $cartItem->delete();
                 }else{
                     $cartItem->quantity = $quantity;
-                    $cartItem->save();
+                    $cartItem->save(); // save the new quantity
                 }
             }
         }
