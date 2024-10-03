@@ -35,7 +35,7 @@ class SalesOrderDetail extends Model
     /**
      * Get the customer that owns the sales order detail.
      */
-    public function customer()
+    public function user()
     {
         return $this->belongsTo(User::class, 'customer_id');
     }

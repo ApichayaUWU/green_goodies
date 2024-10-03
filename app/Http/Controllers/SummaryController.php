@@ -33,65 +33,73 @@ class SummaryController extends Controller
     //     return view('summary',compact('user','addresses','carts'));
     // }
 
-public function add_sale(Request $request)
-{
-    $user = Auth::user();
-    $carts = $user->cart;
-    
+    public function add_sale(Request $request)
+    {
+        $user = Auth::user();
+        $carts = $user->cart;
+        
 
-    // Check if cart is not empty
-    if ($carts->isEmpty()) {
-        return back()->with('error', 'Your cart is empty.');
-    }
-
-    // Start a database transaction
-    DB::beginTransaction();
-
-    try {
-        // Generate a unique order ID
-        $orderId = $user->id . rand(10, 99);
-
-        // Iterate through each cart item and create a SalesOrderDetail entry
-        foreach ($carts as $cart) {
-            SalesOrderDetail::create([
-                'order_id' => $orderId,
-                'customer_id' => $user->id,
-                'product_id'  => $cart->product_id,
-                'quantity'    => $cart->quantity,
-                'total_price' => $cart->quantity * $cart->product->price,  // Assuming product price is available
-            ]);
-            // Decrease the stock quantity of the product
-            $product = Product::find($cart->product_id);
-            if ($product) {
-                $product->stock_quantity -= $cart->quantity;
-                $product->save(); // Save the updated product
-            }
+        // Check if cart is not empty
+        if ($carts->isEmpty()) {
+            return back()->with('error', 'Your cart is empty.');
         }
 
-        // Clear the cart after successful order creation
-        Cart::where('user_id', $user->id)->delete();
+        // Start a database transaction
+        DB::beginTransaction();
 
-        // Commit the transaction
-        DB::commit();
+        try {
+            // Generate a unique order ID
+            $orderId = $user->id . rand(10, 99);
 
-        // Store the order ID in the session
-        Session::put('order_id', $orderId);
+            // Iterate through each cart item and create a SalesOrderDetail entry
+            foreach ($carts as $cart) {
+                SalesOrderDetail::create([
+                    'order_id' => $orderId,
+                    'customer_id' => $user->id,
+                    'product_id'  => $cart->product_id,
+                    'quantity'    => $cart->quantity,
+                    'total_price' => $cart->quantity * $cart->product->price, 
+                ]);
+                // Decrease the stock quantity of the product
+                $product = Product::find($cart->product_id);
+                if ($product) {
+                    $product->stock_quantity -= $cart->quantity;
+                    $product->save(); // Save the updated product
+                }
+            }
 
-        return redirect()->route('order_success')->with('success', 'Sale order added successfully! Your Order ID: ' . $orderId);
+            // Clear the cart after successful order creation
+            Cart::where('user_id', $user->id)->delete();
 
-    } catch (\Exception $e) {
-        // Rollback the transaction in case of error
-        DB::rollBack();
+            // Commit the transaction
+            DB::commit();
 
-        return back()->with('error', 'Failed to process the sale order: ' . $e->getMessage());
+            // Store the order ID in the session
+            Session::put('order_id', $orderId);
+
+            return redirect()->route('order_success')->with('success', 'Sale order added successfully! Your Order ID: ' . $orderId);
+
+        } catch (\Exception $e) {
+            // Rollback the transaction in case of error
+            DB::rollBack();
+
+            return back()->with('error', 'Failed to process the sale order: ' . $e->getMessage());
+        }
     }
-}
 
-public function orderSuccess()
-{
-    $orderId = session('order_id');  // Retrieve the order ID from session
-    return view('order_success', compact('orderId'));
-}
+    public function orderSuccess()
+    {
+        $orderId = session('order_id');  // Retrieve the order ID from session
+        return view('order_success', compact('orderId'));
+    }
 
+    public function order_summary()
+    {
+        $user = Auth::user();
+        $details = $user->salesOrder;
+        $grouped = $details->groupBy('order_id');
+        // return response()->json($grouped);
+        return view('my_order', compact('grouped'));
+    }
 
 }

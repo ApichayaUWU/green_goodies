@@ -11,6 +11,11 @@
                     @if($cartItems->isEmpty())
                         <p>Your cart is empty.</p>
                     @else
+                     <!-- Form to update all cart items -->
+                     <form action="{{ route('cart.update.all') }}" method="POST" id="update-cart-form">
+                            @csrf
+                            @method('PUT')
+
                          <table class="min-w-full border-collapse mx-auto">
                                 <div class="flex flex-row justify-center">
                                     <div class="text-2xl pl-4 pr-64 w-240">
@@ -45,10 +50,14 @@
                                         <div  class="text-xl py-14 pl-52">
                                             <div class="flex flex-row gap-4">   
                                                 <!-- Include Quantity Input Blade Component -->
-                                                <x-quantity-input :quantity="$cartItem->quantity" data-index="{{ $index }}" />
+                                                <x-quantity-input :quantity="$cartItem->quantity" data-index="{{ $index }}" />   
+                                                <!-- Hidden input to hold the updated quantity -->
+                                                <input type="hidden" name="quantities[{{ $cartItem->id }}]" 
+                                                        value="{{ $cartItem->quantity }}" 
+                                                        id="hidden-quantity-{{ $index }}" />
                                             </div>
                                         </div>
-
+                                        
                                         <div class="text-xl py-16 pl-52 w-32 item-total-price" data-index="{{ $index }}"> 
                                             ${{ number_format($cartItem->product->price * $cartItem->quantity, 2) }}
                                         </div>
@@ -67,9 +76,10 @@
                                     @endif
                                       
                                 @endforeach
+                                
                             </tbody>
                         </table>
-
+                       
                     @endif
                 </div>
             </div>
@@ -87,12 +97,15 @@
             <div class="mt-2">
                 <div class="flex flex-row my-4 justify-center">
                             <x-continue-shopping/>
-
-                            <x-checkout/>
+                            <button type="submit" id="update-all-btn" >
+                                <x-checkout/>
+                            </button>
+                            
+                            
 
                 </div>
             </div>
-
+            </form>
         </div>
     </div>
     
@@ -105,10 +118,14 @@
             const decrementButtons = document.querySelectorAll('[data-input-counter-decrement="quantity-input"]');
             const incrementButtons = document.querySelectorAll('[data-input-counter-increment="quantity-input"]');
             const quantityInputs = document.querySelectorAll('[data-input-counter]');
+            const quantityDisplays = document.querySelectorAll('.quantity-display'); // Added this for quantity display
             const itemTotalPrices = document.querySelectorAll('.item-total-price'); // Individual item total prices
             const totalAmountElement = document.querySelector('.total-amount'); // Grand total amount
 
-            // Function to update the total price for each item
+            const hiddenQuantityInputs = document.querySelectorAll('[id^="hidden-quantity-"]');
+            const updateAllBtn = document.getElementById('update-all-btn');
+
+            // Function to update the total price and quantity display for each item
             const updateTotalPrice = function(index) {
                 const quantity = parseInt(quantityInputs[index].value) || 0;
                 const pricePerUnit = parseFloat(cartItems[index].product.price);
@@ -116,6 +133,9 @@
 
                 // Update the item's total price
                 itemTotalPrices[index].innerText = `$${totalPrice.toFixed(2)}`;
+
+                // Update the quantity display
+                quantityDisplays[index].innerText = quantity;
 
                 // Update the grand total
                 updateGrandTotal();
@@ -169,7 +189,22 @@
                     updateTotalPrice(index);
                 });
             });
+
+            // Function to synchronize quantity inputs and hidden inputs
+            const syncHiddenQuantities = () => {
+                quantityInputs.forEach((input, index) => {
+                    const hiddenInput = hiddenQuantityInputs[index];
+                    hiddenInput.value = input.value; // Sync visible input with hidden input
+                });
+            };
+
+            // Event listener for "Update All" button
+            updateAllBtn.addEventListener('click', function() {
+                syncHiddenQuantities(); // Sync before submitting
+                document.getElementById('update-cart-form').submit();
+            });
         });
+
     </script>
 </x-app-layout>
 
