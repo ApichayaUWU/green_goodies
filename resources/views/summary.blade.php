@@ -139,8 +139,8 @@
     .pay {
         border-radius: 50px;
         color: #4C4343;
-        margin-left: auto;
-        margin-top: 10px;
+        margin-left: 385px;
+        /* margin-top: 15px; */
         text-align: center;
         font-size: 1.2em;
         font-weight: bold;
@@ -148,10 +148,23 @@
         padding: 10px;
         width: 140px;
     }
+    
+    .pay-now{
+        margin-top:8px;
+        font-size: 1.4rem;
+    }
+    .button-container {
+    display: flex;                /* Enable flexbox */
+    justify-content: space-between; /* Space between buttons */
+    margin-top: 15px;           /* Adjust spacing as needed */
+}
+.button-wrapper {
+    display: flex;               /* Enable flexbox on parent */
+    justify-content: space-between; /* Space between button containers */
+    margin-top: 15px;           /* Adjust spacing as needed */
+}
+
     </style>
-
-
-
 
     <!-- Cart Items -->
     <div class="mt-6 flex justify-center">
@@ -233,10 +246,16 @@
                             Total : $ {{ $totalPrice }}
                         </div>
 
-                        <input type="hidden" name="total_price" value="{{ $totalPrice }}">
-                        <div class="pay">
-                            <button type="submit" class="">Pay Now ></button>
-                        </div>
+                        <input type="hidden" name="total_price" value="{{ $totalPrice }}" />
+
+                        <div class="button-wrapper">
+    <div class="button-container">
+        <x-back />
+        <div class="pay">
+            <button type="submit" class="pay-now">Pay Now ></button>
+        </div>
+    </div>
+</div>
                     </div>
 
 

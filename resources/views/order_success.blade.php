@@ -21,6 +21,9 @@
     .thank{
         margin-top:-20px;
     }
+    p{
+        color:#4C4343;
+    }
     </style>    
 
     <div class="order">
