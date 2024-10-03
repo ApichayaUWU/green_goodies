@@ -1,153 +1,185 @@
-<nav x-data="{ open: false }" class="bg-white border-b border-gray-100">
+<nav x-data="{ open: false, searchQuery: '', searchResults: [], highlightedIndex: -1 }" class="bg-white border-b border-gray-100">
     <style>
-    .dropdown-list {
-        position: absolute !important;
-        /* ทำให้ dropdown แสดงอยู่เหนือคอนเทนต์อื่น */
-        background-color: white;
-        border: 1px solid #ddd;
-        width: 185%;
-        /* ให้ dropdown กว้างเท่ากับ input */
-        max-height: 200px;
-        /* กำหนดความสูงสูงสุด */
-        overflow-y: auto;
-        /* เพิ่ม scroll ถ้า dropdown ยาวเกินไป */
-        z-index: 999;
-        /* ทำให้ dropdown อยู่เหนือองค์ประกอบอื่น */
-        border-radius: 15px !important;
-        /* Makes the corners rounded */
-    }
-
-    .dropdown-list li {
-        padding-left: 15px;
-        padding-top: 10px;
-        padding-left: 10px;
-    }
-
-    .logo {
-        width: 250px;
-        /* Adjust size as necessary */
-        height: auto;
-        /* Maintain aspect ratio */
-        padding-bottom: 5px;
-        padding-left: 10px;
-    }
-
-    .logo-container {
-        display: flex;
-        justify-content: center;
-        /* Center the logo horizontally */
-        align-items: center;
-        /* Center the logo vertically if needed */
-        width: 100%;
-        /* Take full width */
-    }
-
-    .header-height {
-        height: 6rem;
-        /* Adjust this value for header height (6rem = 96px) */
-    }
-
-    .nav-link-padding {
-        padding-top: 1.5rem;
-        /* Adjust padding to align content vertically */
-        padding-bottom: 1.5rem;
-    }
-
-    .cart-wishlist {
-        width: 30px;
-        height: auto;
-        padding-bottom: 7px;
-        padding-right: 5px;
-    }
-
-    .custom-text-size {
-        font-size: 1.1rem;
-        /* เทียบเท่า text-lg ของ Tailwind */
-        font-weight: bold;
-        /* เทียบเท่า font-bold */
-    }
-
-    input {
-        position: relative;
-        border-radius: 25px !important;
-        /* Makes the corners rounded */
-        border: 3px solid #D0D0D0 !important;
-        /* Optional border for a cleaner look */
-        padding: 10px 20px;
-        /* Padding to make the search bar more spacious */
-        width: 200% !important;
-        /* Make it responsive */
-    }
-
-    .boxinput {
-        padding-top: 15px !important;
-        padding-left: 20px;
-    }
-
-    .group {
-        padding-left: 680px;
-    }
-
-    input::placeholder {
-        color: #aaa;
-        /* เปลี่ยนสีของ placeholder ที่นี่ */
-    }
+        .dropdown-list {
+    position: absolute !important;
+    background-color: white;
+    border: 1px solid #ddd;
+    width: 185%;
+    max-height: 400px;
+    overflow-y: auto !important;  /* ให้แน่ใจว่าสามารถเลื่อนขึ้น-ลงได้ */
+    z-index: 999;
+    border-radius: 15px !important;
+    padding: 0px;
+}
+        .dropdown-list li {
+            padding: 10px;
+            cursor: pointer;
+        }
+        .highlighted {
+            background-color: #f0f0f0;
+        }
+        .logo {
+            width: 250px;
+            height: auto;
+            padding-bottom: 5px;
+            padding-left: 10px;
+        }
+        .header-height {
+            height: 6rem;
+        }
+        input {
+            position: relative;
+            border-radius: 25px !important;
+            border: 3px solid #D0D0D0 !important;
+            padding: 10px 20px;
+            width: 200% !important;
+        }
+        .boxinput {
+            padding-top: 15px !important;
+            padding-left: 20px;
+        }
+        .custom-text-size {
+    margin-top: 10px;
+    font-size: 1rem; /* ขนาดประมาณ text-2xl ใน Tailwind CSS */
+    font-weight: 600; /* ถ้าต้องการให้ตัวหนา */
+}
+        .cart{
+            width: 30px;
+            margin-top: -8px;
+            margin-right: 3px;
+        }
+        .wishlist{
+            width: 30px;
+            margin-top: -8px;
+            margin-right:3px;
+        }
     </style>
-    <!-- Primary Navigation Menu -->
+
     <div class="header-height">
-        <!-- Adjusted the height here -->
         <div class="flex items-center h-full">
             <div class="flex">
                 <!-- Logo -->
-                <div class="shrink-0 flex items-center logo-container">
+                <div class="shrink-0 flex items-center">
                     <a href="{{ route('home') }}">
                         <img src="{{ asset('storage/images/logoheader.png') }}" class="logo" alt="Your Logo" />
                     </a>
                 </div>
-
             </div>
 
-            <div x-data="{ searchQuery: '', searchResults: [], open: false }" @click.away="open = false"
-                class="relative boxinput ms-4">
-                <input type="text" x-model="searchQuery" @input="fetchSearchResults" @focus="open = true"
-                    placeholder="Search products..." class="w-full">
-                <ul x-show="open && searchResults.length > 0" class="dropdown-list">
-                    <template x-for="result in searchResults">
-                        <li>
-                            <a :href="`/products/${result.id}`" x-text="result.name"></a>
-                        </li>
-                    </template>
-                </ul>
-            </div>
+            <!-- Search bar -->
+            <div x-data="initSearchComponent()" class="relative boxinput ms-4" @click.away="open = false">
+    <input type="text" 
+        x-model="searchQuery" 
+        @input="fetchSearchResults" 
+        @keydown.down="highlightNext" 
+        @keydown.up="highlightPrev" 
+        @keydown.enter.prevent="selectResult"
+        placeholder="Search products..." 
+        class="w-full">
+    
+    <ul x-show="open && searchResults.length > 0" class="dropdown-list">
+        <template x-for="(result, index) in searchResults" :key="result.id">
+            <li :class="{ 'highlighted': index === highlightedIndex }" 
+                @click="goToProduct(result.id)">
+                <a x-text="result.name"></a>
+            </li>
+        </template>
+    </ul>
+</div>
+<script>
+function initSearchComponent() {
+    return {
+        open: false,
+        searchQuery: '',
+        searchResults: [],
+        highlightedIndex: -1,
+        
+        // ฟังก์ชันสำหรับดึงข้อมูลผลลัพธ์การค้นหา
+        fetchSearchResults() {
+            if (this.searchQuery.length > 0) {
+                fetch(`/search?q=${this.searchQuery}`)
+                    .then(response => response.json())
+                    .then(data => {
+                        this.searchResults = data;
+                        this.open = true;
+                        this.highlightedIndex = -1; // รีเซ็ตไฮไลท์
+                    });
+            } else {
+                this.searchResults = [];
+                this.open = false;
+            }
+        },
 
+        // ฟังก์ชันสำหรับเลื่อนไฮไลท์ลง
+        highlightNext() {
+            if (this.highlightedIndex < this.searchResults.length - 1) {
+                this.highlightedIndex++;
+                this.scrollToHighlighted();
+            }
+        },
 
-            <script>
-            function fetchSearchResults() {
-                if (this.searchQuery.length > 0) {
-                    fetch(`/search?q=${this.searchQuery}`)
-                        .then(response => response.json())
-                        .then(data => {
-                            this.searchResults = data;
-                            this.open = true;
-                        });
-                } else {
-                    this.searchResults = [];
-                    this.open = false;
+        // ฟังก์ชันสำหรับเลื่อนไฮไลท์ขึ้น
+        highlightPrev() {
+            if (this.highlightedIndex > 0) {
+                this.highlightedIndex--;
+                this.scrollToHighlighted();
+            }
+        },
+
+        // ฟังก์ชันสำหรับเลื่อน dropdown ไปยังรายการที่ถูกไฮไลท์
+        scrollToHighlighted() {
+    this.$nextTick(() => {
+        const dropdown = document.querySelector('.dropdown-list');
+        const highlightedItem = dropdown.querySelector('.highlighted');
+
+        if (highlightedItem) {
+            const dropdownHeight = dropdown.clientHeight;
+            const highlightedTop = highlightedItem.offsetTop;
+            const highlightedHeight = highlightedItem.offsetHeight;
+            const scrollPosition = dropdown.scrollTop;
+
+            // ถ้ารายการที่ไฮไลท์อยู่ต่ำกว่าที่ dropdown แสดงอยู่
+            if (highlightedTop + highlightedHeight > dropdownHeight + scrollPosition) {
+                dropdown.scrollTop = highlightedTop + highlightedHeight - dropdownHeight;
+            }
+
+            // ถ้ารายการที่ไฮไลท์อยู่สูงกว่าที่ dropdown แสดงอยู่
+            if (highlightedTop < scrollPosition) {
+                dropdown.scrollTop = highlightedTop;
+            }
+        }
+    });
+}
+,
+
+        // ฟังก์ชันสำหรับเลือกผลลัพธ์ที่ถูกไฮไลท์
+        selectResult() {
+            if (this.highlightedIndex >= 0 && this.searchResults.length > 0) {
+                const selectedResult = this.searchResults[this.highlightedIndex];
+                if (selectedResult) {
+                    this.goToProduct(selectedResult.id);
                 }
             }
-            </script>
+        },
 
+        // ฟังก์ชันสำหรับไปยังหน้าผลิตภัณฑ์ที่ถูกเลือก
+        goToProduct(productId) {
+            window.location.href = `/products/${productId}`;
+        }
+    }
+}
+</script>
 
         @if (Auth::user())
             <!-- wishlist cart and username -->
-            <div class="hidden sm:flex sm:items-center sm:ms-6 space-x-4 nav-link-padding group">
+            <div class="hidden sm:flex sm:items-center sm:ms-6 space-x-4 nav-link-padding group" style="margin-left:700px ">
                 <!-- Wishlist and Cart with Icons -->
                 <x-nav-link :href="route('wishlist.index')" class="custom-text-size">
-                    <img src="{{ asset('storage/images/wishlist.png') }}" class="cart-wishlist ">
+                    <img src="{{ asset('storage/images/wishlist.png') }}" class="wishlist ">
                     {{ __('Wishlist') }}
                 </x-nav-link>
                 <x-nav-link :href="route('cart.show')" class="custom-text-size">
-                    <img src="{{ asset('storage/images/cart.png') }}" class="cart-wishlist">
+                    <img src="{{ asset('storage/images/cart.png') }}" class="cart">
                     {{ __('Cart') }}
                 </x-nav-link>
 
