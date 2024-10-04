@@ -114,8 +114,9 @@
     .no_address {
         background-color: #b95846;
         border-radius: 50px;
+        padding: 5px;
         width: 200px;
-        height: 25px;
+        height: 30px;
     }
 
     .address-select {
@@ -214,7 +215,7 @@
                     </div>
                     @else
                     <div class="no_address">
-                        <p class="ml-3">No addresses available.</p>
+                        <p class="ml-2" style="color: white">No addresses available</p>
                     </div>
                     <div class="address">
                         <div class="flex flex-col">
