@@ -27,8 +27,8 @@
         </style>
     </head>
     <div class="brownBg pt-6 pb-3 flex flex-row flex-wrap justify-center">
-        <h2 class="font-semibold text-4xl text-gray-800 leading-tight">
-            {{ __('Profile') }}
+        <h2 class="font-semibold text-4xl text-#4C4343-800 leading-tight">
+            {{ __('My Infomation') }}
         </h2>
     </div>
 
