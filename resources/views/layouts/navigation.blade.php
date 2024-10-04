@@ -19,7 +19,7 @@
             background-color: #f0f0f0;
         }
         .logo {
-            width: 250px;
+            width: 15vw;
             height: auto;
             padding-bottom: 5px;
             padding-left: 10px;
@@ -36,7 +36,7 @@
         }
         .boxinput {
             padding-top: 15px !important;
-            padding-left: 20px;
+            padding-left: 6vw;
         }
         .custom-text-size {
             margin-top: 10px;
@@ -44,12 +44,17 @@
             font-weight: 600; /* ถ้าต้องการให้ตัวหนา */
         }
         .cart{
-            width: 30px;
+            width: 3vw;
             margin-top: -8px;
             margin-right: 3px;
         }
         .wishlist{
-            width: 30px;
+            width: 3vw;
+            margin-top: -8px;
+            margin-right:3px;
+        }
+        .cart-wishlist{
+            width: 3vw;
             margin-top: -8px;
             margin-right:3px;
         }
