@@ -44,17 +44,17 @@
             font-weight: 600; /* ถ้าต้องการให้ตัวหนา */
         }
         .cart{
-            width: 3vw;
+            width: 2vw;
             margin-top: -8px;
             margin-right: 3px;
         }
         .wishlist{
-            width: 3vw;
+            width: 2vw;
             margin-top: -8px;
             margin-right:3px;
         }
         .cart-wishlist{
-            width: 3vw;
+            width: 2vw;
             margin-top: -8px;
             margin-right:3px;
         }
@@ -179,19 +179,20 @@ function initSearchComponent() {
         @if (Auth::user())
             <!-- wishlist cart and username -->
             <div class="hidden sm:flex sm:items-center sm:ms-6 space-x-4 nav-link-padding group" style="margin-left:700px ">
-                <!-- Wishlist and Cart with Icons -->
-                <x-nav-link :href="route('summary.order')" class="custom-text-size min-w-[50px]">
-                    <img src="{{ asset('storage/images/wishlist.png') }}" class="cart-wishlist ">
-                    {{ __('MyOrder') }}
-                </x-nav-link>
-                <x-nav-link :href="route('wishlist.index')" class="custom-text-size">
-                    <img src="{{ asset('storage/images/wishlist.png') }}" class="wishlist ">
-                    {{ __('Wishlist') }}
-                </x-nav-link>
-                <x-nav-link :href="route('cart.show')" class="custom-text-size">
-                    <img src="{{ asset('storage/images/cart.png') }}" class="cart">
-                    {{ __('Cart') }}
-                </x-nav-link>
+                 <!-- Wishlist and Cart with Icons -->
+                 <x-nav-link :href="route('summary.order')" class="custom-text-size min-w-[50px] flex items-center" style="padding-right: 40px; white-space: nowrap;">
+    <img src="{{ asset('storage/images/wishlist.png') }}" class="cart-wishlist" style="margin-right: 8px; width: 1.5rem; height: auto; vertical-align: middle;">
+    <span style="vertical-align: middle;">{{ __('My Order') }}</span>
+</x-nav-link>
+
+        <x-nav-link :href="route('wishlist.index')" class="custom-text-size" style="padding-right: 30px;">
+            <img src="{{ asset('storage/images/wishlist.png') }}" class="wishlist">
+            {{ __('Wishlist') }}
+        </x-nav-link>
+        <x-nav-link :href="route('cart.show')" class="custom-text-size" style="padding-right: 10px;">
+            <img src="{{ asset('storage/images/cart.png') }}" class="cart">
+            {{ __('Cart') }}
+        </x-nav-link>
 
                 <!-- User Authentication -->
                 @auth
