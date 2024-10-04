@@ -1,16 +1,18 @@
 <x-app-layout>
 <style>
-    .wishlist{
-        margin-top: 20px;
+    .wish{
+        margin-top: 16;
     }
     .no{
         padding-left:60px;
         padding-top:15px;
     }
 </style>
+
 <div class="bg-[#53B637] text-center w-[200px] rounded-[40px] mt-10 mb-4 mx-8">
         <p class="pt-5 text-2xl text-white p-2"><strong>Wish List</strong></p>
     </div>
+
 <div class="p-3 text-gray-900">
             @if($wishlistItems->isEmpty())
             <div class = "flex flex-row justify-center">

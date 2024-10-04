@@ -22,6 +22,10 @@ return new class extends Migration
                 ->constrained('products')
                 ->onDelete('set null') // Automatically delete details if the product is deleted
                 ->onUpdate('cascade');
+            $table->foreignId('address_id')->nullable() // Foreign key to address table
+                ->constrained('user_address')
+                ->onDelete('set null') // Automatically delete details if the product is deleted
+                ->onUpdate('cascade');
             $table->integer('quantity'); // Quantity of the product ordered
             $table->decimal('total_price', 10, 2); // Total price of the order line item
             $table->timestamps(); // Created_at and updated_at

@@ -38,6 +38,11 @@
                     Order ID : {{ $order_id }}
                 </p>
 
+@if ($orderDetails->first()->address)
+        <p>Address: {{ $orderDetails->first()->address->address_name }}</p>
+        @else
+        <p>Pick up at the store</p>
+        @endif
                 <table border="1" class ="mx-15 table-fixed w-full">
                     <thead class = "bg-[#fbf8f1]">
                         <tr>
@@ -73,3 +78,4 @@
         @endforeach
     @endif
 </x-app-layout>
+

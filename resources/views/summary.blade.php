@@ -111,6 +111,13 @@
         width: 250px;
     }
 
+    .no_address {
+        background-color: #b95846;
+        border-radius: 50px;
+        padding: 5px;
+        width: 200px;
+        height: 30px;
+    }
 
     .address-select {
         margin-top: 10px;
@@ -139,8 +146,8 @@
     .pay {
         border-radius: 50px;
         color: #4C4343;
-        margin-left: auto;
-        margin-top: 10px;
+        margin-left: 385px;
+        /* margin-top: 15px; */
         text-align: center;
         font-size: 1.2em;
         font-weight: bold;
@@ -148,10 +155,23 @@
         padding: 10px;
         width: 140px;
     }
+    
+    .pay-now{
+        margin-top:8px;
+        font-size: 1.4rem;
+    }
+    .button-container {
+    display: flex;                /* Enable flexbox */
+    justify-content: space-between; /* Space between buttons */
+    margin-top: 15px;           /* Adjust spacing as needed */
+}
+.button-wrapper {
+    display: flex;               /* Enable flexbox on parent */
+    justify-content: space-between; /* Space between button containers */
+    margin-top: 15px;           /* Adjust spacing as needed */
+}
+
     </style>
-
-
-
 
     <!-- Cart Items -->
     <div class="mt-6 flex justify-center">
@@ -176,17 +196,22 @@
                         </svg>
 
                     </div>
-                    <select name="address_id" id="address_id" required class="address-select">
+                    @if ($addresses->isNotEmpty())
+                    <select name="address_id" id="address_id" required class="address-select"
+                        onchange="updateHiddenAddressId()">
                         @foreach($addresses as $address)
                         <option value="{{ $address->id }}" data-line1="{{ $address->address_line1 }}"
                             data-line2="{{ $address->address_line2 }}" data-city="{{ $address->city }}"
                             data-district="{{ $address->district }}" data-sub-district="{{ $address->sub_district }}"
-                            @if($loop->first) selected @endif>
+                            {{ $address->id == (isset($selectedAddressId) ? $selectedAddressId : $addresses->first()->id) ? 'selected' : '' }}>
                             {{ $address->address_name }}
                         </option>
                         @endforeach
                     </select>
 
+                    <!-- Hidden input to store the selected address -->
+                    <input type="hidden" name="SelectAddress" id="hidden_selected_address"
+                        value="{{ isset($selectedAddressId) ? $selectedAddressId : $addresses->first()->id }}">
                     <div class="address">
                         <div class="flex flex-col">
                             <div class="">username : {{ Auth::user()->name }}</div>
@@ -201,6 +226,25 @@
                         </div>
 
                     </div>
+                    @else
+                    <div class="no_address">
+                        <p class="ml-2" style="color: white">No addresses available</p>
+                    </div>
+                    <div class="address">
+                        <div class="flex flex-col">
+                            <div class="">username : {{ Auth::user()->name }}</div>
+                            <!-- Placeholder for showing the selected address details -->
+                            <div id="address-details">
+                                <p><strong>Pick up at the store</strong> </p>
+                            </div>
+                        </div>
+                    </div>
+                    @endif
+
+                    <!-- Hidden input to store the selected address -->
+
+
+
 
 
 
@@ -233,10 +277,16 @@
                             Total : $ {{ $totalPrice }}
                         </div>
 
-                        <input type="hidden" name="total_price" value="{{ $totalPrice }}">
-                        <div class="pay">
-                            <button type="submit" class="">Pay Now ></button>
-                        </div>
+                        <input type="hidden" name="total_price" value="{{ $totalPrice }}" />
+
+                        <div class="button-wrapper">
+    <div class="button-container">
+        <x-back />
+        <div class="pay">
+            <button type="submit" class="pay-now">Pay Now ></button>
+        </div>
+    </div>
+</div>
                     </div>
 
 
@@ -269,5 +319,21 @@
             updateAddressDetails(selectedOption);
         });
     });
+    </script>
+    <script>
+    function updateHiddenAddressId() {
+        // Get the select element
+        var select = document.getElementById('address_id');
+        // Get the value of the selected option
+        var selectedAddressId = select.value;
+
+        // Check if a valid address is selected (optional validation)
+        if (selectedAddressId) {
+            // Update the hidden input value
+            document.getElementById('hidden_selected_address').value = selectedAddressId;
+        } else {
+            alert("Please select a valid address.");
+        }
+    }
     </script>
 </x-app-layout>
