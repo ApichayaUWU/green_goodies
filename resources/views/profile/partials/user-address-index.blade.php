@@ -92,5 +92,5 @@
     @endforeach
 </div>
 @else
-<p>No addresses available.</p>
+<p class="ml-9">No addresses available.</p>
 @endif

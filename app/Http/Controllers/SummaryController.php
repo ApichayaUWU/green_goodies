@@ -37,7 +37,7 @@ class SummaryController extends Controller
     {
         $user = Auth::user();
         $carts = $user->cart;
-        
+        $address = $request->SelectAddress;
 
         // Check if cart is not empty
         if ($carts->isEmpty()) {
@@ -47,16 +47,17 @@ class SummaryController extends Controller
         // Start a database transaction
         DB::beginTransaction();
 
-        try {
+        // try {
             // Generate a unique order ID
             $orderId = $user->id . rand(10, 99);
-
+            
             // Iterate through each cart item and create a SalesOrderDetail entry
             foreach ($carts as $cart) {
                 SalesOrderDetail::create([
                     'order_id' => $orderId,
                     'customer_id' => $user->id,
                     'product_id'  => $cart->product_id,
+                    'address_id'  => $address,
                     'quantity'    => $cart->quantity,
                     'total_price' => $cart->quantity * $cart->product->price, 
                 ]);
@@ -77,14 +78,15 @@ class SummaryController extends Controller
             // Store the order ID in the session
             Session::put('order_id', $orderId);
 
+            //return response()->json($user->sales_order_detail);
             return redirect()->route('order_success')->with('success', 'Sale order added successfully! Your Order ID: ' . $orderId);
 
-        } catch (\Exception $e) {
-            // Rollback the transaction in case of error
-            DB::rollBack();
+        // } catch (\Exception $e) {
+        //     // Rollback the transaction in case of error
+        //     DB::rollBack();
 
-            return back()->with('error', 'Failed to process the sale order: ' . $e->getMessage());
-        }
+        //     return back()->with('error', 'Failed to process the sale order: ' . $e->getMessage());
+        // }
     }
 
     public function orderSuccess()
@@ -97,6 +99,10 @@ class SummaryController extends Controller
     {
         $user = Auth::user();
         $details = $user->salesOrder;
+        $details = SalesOrderDetail::where('customer_id', $user->id)
+           ->with('product', 'address') 
+            ->get(); 
+
         $grouped = $details->groupBy('order_id');
         // return response()->json($grouped);
         return view('my_order', compact('grouped'));

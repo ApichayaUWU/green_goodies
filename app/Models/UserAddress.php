@@ -33,4 +33,9 @@ class UserAddress extends Model
     {
         return $this->belongsTo(User::class, 'user_id');
     }
+
+    public function salesOrder(): HasMany
+    {
+        return $this->hasMany(SalesOrderDetail::class, 'UserAddress_id');
+    }
 }

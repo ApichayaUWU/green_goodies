@@ -55,7 +55,7 @@
                     </div>
 
 
-                    <div class="">
+                    <div class="mr-5">
                         <a href="{{ route('address.form') }}">
                             <svg width="150" height="40" viewBox="0 0 210 45" fill="none"
                                 xmlns="http://www.w3.org/2000/svg">

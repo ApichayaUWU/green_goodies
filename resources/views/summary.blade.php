@@ -111,6 +111,13 @@
         width: 250px;
     }
 
+    .no_address {
+        background-color: #b95846;
+        border-radius: 50px;
+        padding: 5px;
+        width: 200px;
+        height: 30px;
+    }
 
     .address-select {
         margin-top: 10px;
@@ -189,17 +196,22 @@
                         </svg>
 
                     </div>
-                    <select name="address_id" id="address_id" required class="address-select">
+                    @if ($addresses->isNotEmpty())
+                    <select name="address_id" id="address_id" required class="address-select"
+                        onchange="updateHiddenAddressId()">
                         @foreach($addresses as $address)
                         <option value="{{ $address->id }}" data-line1="{{ $address->address_line1 }}"
                             data-line2="{{ $address->address_line2 }}" data-city="{{ $address->city }}"
                             data-district="{{ $address->district }}" data-sub-district="{{ $address->sub_district }}"
-                            @if($loop->first) selected @endif>
+                            {{ $address->id == (isset($selectedAddressId) ? $selectedAddressId : $addresses->first()->id) ? 'selected' : '' }}>
                             {{ $address->address_name }}
                         </option>
                         @endforeach
                     </select>
 
+                    <!-- Hidden input to store the selected address -->
+                    <input type="hidden" name="SelectAddress" id="hidden_selected_address"
+                        value="{{ isset($selectedAddressId) ? $selectedAddressId : $addresses->first()->id }}">
                     <div class="address">
                         <div class="flex flex-col">
                             <div class="">username : {{ Auth::user()->name }}</div>
@@ -214,6 +226,25 @@
                         </div>
 
                     </div>
+                    @else
+                    <div class="no_address">
+                        <p class="ml-2" style="color: white">No addresses available</p>
+                    </div>
+                    <div class="address">
+                        <div class="flex flex-col">
+                            <div class="">username : {{ Auth::user()->name }}</div>
+                            <!-- Placeholder for showing the selected address details -->
+                            <div id="address-details">
+                                <p><strong>Pick up at the store</strong> </p>
+                            </div>
+                        </div>
+                    </div>
+                    @endif
+
+                    <!-- Hidden input to store the selected address -->
+
+
+
 
 
 
@@ -288,5 +319,21 @@
             updateAddressDetails(selectedOption);
         });
     });
+    </script>
+    <script>
+    function updateHiddenAddressId() {
+        // Get the select element
+        var select = document.getElementById('address_id');
+        // Get the value of the selected option
+        var selectedAddressId = select.value;
+
+        // Check if a valid address is selected (optional validation)
+        if (selectedAddressId) {
+            // Update the hidden input value
+            document.getElementById('hidden_selected_address').value = selectedAddressId;
+        } else {
+            alert("Please select a valid address.");
+        }
+    }
     </script>
 </x-app-layout>
