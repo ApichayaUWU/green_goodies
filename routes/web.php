@@ -50,8 +50,10 @@ Route::middleware('auth')->group(function () {
     Route::post('/profile/photo/update', [UserController::class, 'updateProfilePhoto'])->name('profile.photo.update');
     
     // admin only
-    Route::get('/products/create', [ProductController::class, 'form'])->name('products.form');
-    Route::post('/products/create', [ProductController::class, 'store'])->name('products.form');
+    Route::get('/backroom', [ProductController::class, 'form'])->name('products.form');
+    Route::post('/backroom', [ProductController::class, 'store'])->name('products.store');
+    Route::post('/backroom/{id}', [ProductController::class, 'store'])->name('products.update');
+    Route::delete('/backroom/{id}',[ProdeuctController::class, 'destroy'])->name('products.destroy');
     
     // add to cart for detail page
     Route::post('/products/{product}', [CartController::class, 'addToCart'])->name('cart.add');

@@ -27,14 +27,10 @@
                         class="mt-4 hidden overflow-hidden transition-all duration-500 ease-in-out max-h-0">
 
                         <form
-                            action="{{ isset($product) ? route('products.update', $product->id) : route('products.store') }}"
+                            action="{{ route('products.store') }}"
                             method="POST" enctype="multipart/form-data">
                             @csrf
-                            @if (isset($product))
-                            @method('PUT')
-                            @else
                             @method('POST')
-                            @endif
 
                             {{-- Product Name --}}
                             <div class="mb-4">
@@ -222,7 +218,6 @@
             <h3 class="text-lg font-semibold text-gray-800">Edit Product</h3>
             <form id="editForm" action="" method="POST" enctype="multipart/form-data">
                 @csrf
-                @method('PUT')
 
                 <div class="mb-4">
                     <label for="edit_id" class="block text-sm font-medium text-gray-700">id</label>
@@ -316,7 +311,7 @@
 
 
     function openEditModal(product) {
-        document.getElementById('editForm').action = '/products/' + product.id;
+        document.getElementById('editForm').action = '/backroom/' + product.id;
         document.getElementById('edit_id').value = product.id;
         document.getElementById('edit_name').value = product.name;
         document.getElementById('edit_category_id').value = product.category_id;
