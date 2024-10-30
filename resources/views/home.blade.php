@@ -106,10 +106,10 @@
 </div>
 
 <!-- Featured Categories -->
-    <div class="featured flex justify-center flex-col">
+    <div class="featured flex justify-center flex-col overflow-hidden">
         <x-Featured-Home />
-        <div class="cat-container">
-            <div class="flex flex-row justify-around mt-32 space-x-24" style = "margin-top: 150px">
+        <div class="cat-container overflow-x-auto">
+        <div class="flex flex-nowrap justify-between mt-32 space-x-16 px-4">
                 <!-- Category Icons -->
                     <x-Banana-Home />
                     <x-Durains-Home />
