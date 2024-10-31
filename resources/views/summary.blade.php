@@ -143,34 +143,33 @@
         font-size: 1.1em;
     }
 
-    .pay {
-        border-radius: 50px;
-        color: #4C4343;
-        margin-left: 385px;
-        /* margin-top: 15px; */
-        text-align: center;
-        font-size: 1.2em;
-        font-weight: bold;
-        background-color: #ACE094;
-        padding: 10px;
-        width: 140px;
+    .back {
+        margin-top: 2px;
     }
-    
-    .pay-now{
-        margin-top:8px;
-        font-size: 1.4rem;
-    }
-    .button-container {
-    display: flex;                /* Enable flexbox */
-    justify-content: space-between; /* Space between buttons */
-    margin-top: 15px;           /* Adjust spacing as needed */
-}
-.button-wrapper {
-    display: flex;               /* Enable flexbox on parent */
-    justify-content: space-between; /* Space between button containers */
-    margin-top: 15px;           /* Adjust spacing as needed */
-}
 
+    .pay {
+
+        margin-left: 295px;
+
+    }
+
+    .button-container {
+        display: flex;
+        /* Enable flexbox */
+        justify-content: space-between;
+        /* Space between buttons */
+        margin-top: 15px;
+        /* Adjust spacing as needed */
+    }
+
+    .button-wrapper {
+        display: flex;
+        /* Enable flexbox on parent */
+        justify-content: space-between;
+        /* Space between button containers */
+        margin-top: 15px;
+        /* Adjust spacing as needed */
+    }
     </style>
 
     <!-- Cart Items -->
@@ -249,6 +248,7 @@
 
 
                     <!-- </div> -->
+
                     <div class="text-block-II"><svg width="140" height="29" viewBox="0 0 201 29" fill="none"
                             xmlns="http://www.w3.org/2000/svg">
                             <path
@@ -280,13 +280,16 @@
                         <input type="hidden" name="total_price" value="{{ $totalPrice }}" />
 
                         <div class="button-wrapper">
-    <div class="button-container">
-        <x-back />
-        <div class="pay">
-            <button type="submit" class="pay-now">Pay Now ></button>
-        </div>
-    </div>
-</div>
+                            <div class="button-container">
+                                <div class="back">
+                                    <x-back />
+                                </div>
+
+                                <div class="pay">
+                                    <x-pay />
+                                </div>
+                            </div>
+                        </div>
                     </div>
 
 
