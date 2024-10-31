@@ -72,7 +72,7 @@
                 <div class="flex flex-col text-left">
                     <p class="text-gray-800 font-semibold">Contact Us</p>
                     <p class="text-gray-600" style="padding-left : 30px">
-                        Tel: 099-999-9999<br>
+                        Tel: 021-231-2121<br>
                         Email: greengoodies@gmail.com
                     </p>
                 </div>
