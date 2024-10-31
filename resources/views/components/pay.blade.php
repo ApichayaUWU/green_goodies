@@ -13,13 +13,13 @@
 }
 
 .custom-button:hover .button-background {
-    fill: #EEEEEE;
+    fill: #EEEEEE; 
 }
 </style>
 <div class="custom-button">
     <button type="submit" id="update-all-btn" class="custom-button">
         <svg width="292" height="60" viewBox="0 0 210 60" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <rect width="190" height="60" rx="30" fill="#ACE094" />
+            <rect  class="button-background" width="190" height="60" rx="30" fill="#ACE094" />
             <path d="M154 46L169 31L154 16" stroke="#4C4343" stroke-width="0.8" stroke-linecap="round"
                 stroke-linejoin="round" />
             <path
