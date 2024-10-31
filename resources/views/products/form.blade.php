@@ -144,17 +144,17 @@
                         @if($allProducts->isEmpty())
                         <p>No products available at the moment.</p>
                         @else
-                        <table class="min-w-full table-auto">
-                            <thead>
+                        <table class="min-w-full table-auto ">
+                            <thead class="bg-[#fbf8f1]">
                                 <tr>
-                                    <th class="px-4 py-2">Image</th>
-                                    <th class="px-4 py-2">Name</th>
-                                    <th class="px-4 py-2">Category</th>
-                                    <th class="px-4 py-2">Price</th>
-                                    <th class="px-4 py-2">Stock</th>
-                                    <th class="px-4 py-2">Description</th>
-                                    <th class="px-4 py-2">Popularity</th>
-                                    <th class="px-4 py-2">Actions</th>
+                                    <th class="p-2 text-lg text-[#4C4343]">Image</th>
+                                    <th class="p-2 text-lg text-[#4C4343]">Name</th>
+                                    <th class="p-2 text-lg text-[#4C4343]">Category</th>
+                                    <th class="p-2 text-lg text-[#4C4343]">Price</th>
+                                    <th class="p-2 text-lg text-[#4C4343]">Stock</th>
+                                    <th class="p-2 text-lg text-[#4C4343]">Description</th>
+                                    <th class="p-2 text-lg text-[#4C4343]">Popularity</th>
+                                    <th class="p-2 text-lg text-[#4C4343]">Actions</th>
                                 </tr>
                             </thead>
                             <tbody>
