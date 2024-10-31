@@ -5,6 +5,13 @@
     box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
     background-color: #EFEFEF;
     margin-right: 15px;
+    border: 2px solid transparent; /* เริ่มต้นไม่มี border */
+    transition: border-color 0.3s ease; /* เพิ่ม transition เพื่อความนุ่มนวล */
+}
+
+.card:hover {
+    border-color: #8A8A8A; /* เปลี่ยน border เป็นสีน้ำตาลเมื่อ hover */
+    border-width: 4px;
 }
 
 .home-card {
