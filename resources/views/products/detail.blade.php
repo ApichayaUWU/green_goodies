@@ -35,9 +35,9 @@
         width: 661px;
     }
 
-    .wishlist {
+    /* .wishlist {
         margin-top: 8px;
-    }
+    } */
     </style>
 
     <div class="brownBg pt-6 pb-3 flex flex-row flex-wrap justify-center">
