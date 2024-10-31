@@ -63,7 +63,7 @@ class ProductController extends Controller
         $user = AUTH::user();
         if($user->email == "admin@gmail.com"){
             $categories = ProductCategory::all();
-            $allProducts = Product::all(); // Get all products
+            $allProducts = Product::paginate(10); // Get all products
             return view('products.form', compact('categories', 'allProducts'));
         }
         redirect()->route('home')->with('success', 'you are not admin.');

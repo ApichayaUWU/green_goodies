@@ -1,30 +1,47 @@
 <x-app-layout>
-    <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ isset($product) ? __('Edit Product') : __('หลังร้าน') }}
+    <style>
+        body {
+            background-color: white !important;
+        }
+
+        .brownBg {
+            background-color: #F4EDDC;
+        }
+
+        .textColor {
+            color: #4C4343;
+        }
+
+        .textColorSelected {
+            color: #53B637;
+        }
+
+    </style>
+    <div class="brownBg pt-6 pb-3 flex flex-row flex-wrap justify-center">
+        <h2 class="font-semibold text-4xl text-gray-800 leading-tight">
+        {{ isset($product) ? __('Edit Product') : __('Stock Control') }}
         </h2>
-    </x-slot>
+    </div>
 
     <div class="py-4">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900">
-
                     {{-- Button to toggle form --}}
                     <button id="toggleFormButton"
-                        class="flex items-center px-4 py-2 bg-indigo-600 text-white rounded-md focus:ring focus:ring-indigo-300 hover:bg-indigo-700"
+                        class="bg-[#53B637] text-center w-[250px] rounded-[40px] mt-3 mb-4 flex flex-row justify-center"
                         onclick="toggleForm()">
-                        <span>{{ isset($product) ? 'Edit Product' : 'Add New Product' }}</span>
+                        <span class="pt-5 text-xl text-white p-2"><strong>{{ isset($product) ? 'Edit Product' : 'Add New Product' }}</strong></span>
                         <svg id="toggleIcon" xmlns="http://www.w3.org/2000/svg"
-                            class="ml-2 h-5 w-5 transition-transform transform rotate-0" fill="none" viewBox="0 0 24 24"
-                            stroke="currentColor">
+                            class="mt-5 ml-2 h-5 w-5 transition-transform transform rotate-0" fill="none" viewBox="0 0 24 24"
+                            stroke="white">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 15l7-7 7 7" />
                         </svg>
                     </button>
 
                     {{-- Form for creating and editing a product --}}
                     <div id="productForm"
-                        class="mt-4 hidden overflow-hidden transition-all duration-500 ease-in-out max-h-0">
+                        class="mt-8 hidden overflow-hidden transition-all duration-500 ease-in-out max-h-0">
 
                         <form
                             action="{{ route('products.store') }}"
@@ -33,16 +50,16 @@
                             @method('POST')
 
                             {{-- Product Name --}}
-                            <div class="mb-4">
-                                <label for="name" class="block text-sm font-medium text-gray-700">Product Name</label>
+                            <div class="mb-4 w-[300px]">
+                                <label for="name" class="block text-l font-medium text-[#4C4343]-700">Product Name</label>
                                 <input type="text" name="name" id="name" value="{{ old('name', $product->name ?? '') }}"
                                     class="block w-full px-4 py-2 mt-2 border-gray-300 rounded-md focus:ring focus:ring-indigo-300 focus:border-indigo-300"
                                     required />
                             </div>
 
                             {{-- Product Image --}}
-                            <div class="mb-4">
-                                <label for="image" class="block text-sm font-medium text-gray-700">Product Image</label>
+                            <div class="mb-4 w-[300px]">
+                                <label for="image" class="block text-l font-medium text-[#4C4343]-700">Product Image</label>
                                 <input type="file" name="image" id="image"
                                     class="block w-full px-4 py-2 mt-2 border-gray-300 rounded-md focus:ring focus:ring-indigo-300 focus:border-indigo-300"
                                     accept="image/*" onchange="previewImage(event)" />
@@ -54,9 +71,9 @@
                             </div>
 
                             {{-- Product Category --}}
-                            <div class="mb-4">
+                            <div class="mb-4 w-[300px]">
                                 <label for="category_id"
-                                    class="block text-sm font-medium text-gray-700">Category</label>
+                                    class="block text-l font-medium text-[#4C4343]-700">Category</label>
                                 <select name="category_id" id="category_id"
                                     class="block w-full px-4 py-2 mt-2 border-gray-300 rounded-md focus:ring focus:ring-indigo-300 focus:border-indigo-300"
                                     required>
@@ -73,15 +90,15 @@
                             {{-- Product Description --}}
                             <div class="mb-4">
                                 <label for="description"
-                                    class="block text-sm font-medium text-gray-700">Description</label>
+                                    class="block text-l font-medium text-[#4C4343]-700">Description</label>
                                 <textarea name="description" id="description" rows="4"
                                     class="block w-full px-4 py-2 mt-2 border-gray-300 rounded-md focus:ring focus:ring-indigo-300 focus:border-indigo-300"
                                     required>{{ old('description', $product->description ?? '') }}</textarea>
                             </div>
 
                             {{-- Product Price --}}
-                            <div class="mb-4">
-                                <label for="price" class="block text-sm font-medium text-gray-700">Price</label>
+                            <div class="mb-4 w-[300px]">
+                                <label for="price" class="block text-l font-medium text-[#4C4343]-700">Price</label>
                                 <input type="number" name="price" id="price" step="0.01"
                                     value="{{ old('price', $product->price ?? '') }}"
                                     class="block w-full px-4 py-2 mt-2 border-gray-300 rounded-md focus:ring focus:ring-indigo-300 focus:border-indigo-300"
@@ -89,8 +106,8 @@
                             </div>
 
                             {{-- Stock Quantity --}}
-                            <div class="mb-4">
-                                <label for="stock_quantity" class="block text-sm font-medium text-gray-700">Stock
+                            <div class="mb-4 w-[300px]">
+                                <label for="stock_quantity" class="block text-l font-medium text-[#4C4343]-700">Stock
                                     Quantity</label>
                                 <input type="number" name="stock_quantity" id="stock_quantity"
                                     value="{{ old('stock_quantity', $product->stock_quantity ?? '') }}"
@@ -99,10 +116,12 @@
                             </div>
 
                             {{-- Submit Button --}}
-                            <div class="mt-6">
+                            <div class="mt-6 ">
                                 <button type="submit"
-                                    class="px-6 py-2 text-white bg-indigo-600 rounded-md hover:bg-indigo-700 focus:ring focus:ring-indigo-300 focus:border-indigo-300">
-                                    {{ isset($product) ? 'Update Product' : 'Add Product' }}
+                                    class="bg-[#E3EBC1] hover:bg-[#f7f9ee] text-center w-[150px] rounded-[40px] mt-3 mb-4">
+                                    <p class="pt-4 text-l text-[#4C4343] p-2">
+                                    <strong>{{ isset($product) ? 'Update Product' : 'Add Product' }}</strong>
+                                    </p>
                                 </button>
                             </div>
 
@@ -117,10 +136,10 @@
     <div class="py-4">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                <div class="p-6 text-gray-900">
+                <div class="px-6 text-gray-900">
                     {{-- Display all products --}}
                     <div class="mt-8">
-                        <h2 class="text-xl font-semibold text-gray-700">All Products</h2>
+                        <h2 class="text-2xl mb-4 font-semibold text-gray-700">All Products</h2>
 
                         @if($allProducts->isEmpty())
                         <p>No products available at the moment.</p>
@@ -152,22 +171,22 @@
                                     </td>
 
                                     {{-- Product Name --}}
-                                    <td class="px-4 py-2">
+                                    <td class="px-4 py-2 text-center">
                                         {{ $product->name }}
                                     </td>
 
                                     {{-- Product Category --}}
-                                    <td class="px-4 py-2">
+                                    <td class="px-4 py-2 text-center">
                                         {{ $product->category->name ?? 'Uncategorized' }}
                                     </td>
 
                                     {{-- Product Price --}}
-                                    <td class="px-4 py-2">
+                                    <td class="px-4 py-2 text-center">
                                         ${{ number_format($product->price, 2) }}
                                     </td>
 
                                     {{-- Stock Quantity --}}
-                                    <td class="px-4 py-2">
+                                    <td class="px-4 py-2 text-center">
                                         {{ $product->stock_quantity }}
                                     </td>
 
@@ -177,16 +196,16 @@
                                     </td>
 
                                     {{-- Popularity --}}
-                                    <td class="px-4 py-2">
+                                    <td class="px-4 py-2 text-center">
                                         {{ $product->popularity }}
                                     </td>
 
                                     {{-- Actions --}}
-                                    <td class="px-4 py-2">
+                                    <td class="px-4 py-2 flex flex-col justify-center">
                                         {{-- Edit Button --}}
-                                        <button class="px-4 py-2 text-white bg-blue-500 rounded-md hover:bg-blue-600"
+                                        <button class="bg-[#E3EBC1] hover:bg-[#f7f9ee] text-center w-[100px] rounded-[40px] mb-2"
                                             onclick="openEditModal({{ json_encode($product) }})">
-                                            Edit
+                                            <p class="pt-4 text-l text-[#4C4343] p-2"><strong>Edit</strong></p>
                                         </button>
 
                                         {{-- Delete Button --}}
@@ -195,9 +214,9 @@
                                             @csrf
                                             @method('DELETE')
                                             <button type="submit"
-                                                class="px-4 py-2 text-white bg-red-500 rounded-md hover:bg-red-600"
+                                                class="bg-[#b95846] hover:bg-[#cf8d81] text-center w-[100px] rounded-[40px]"
                                                 onclick="return confirm('Are you sure you want to delete this product?')">
-                                                Delete
+                                                <p class="pt-4 text-l text-white p-2"><strong>Delete</strong></p>
                                             </button>
                                         </form>
                                     </td>
@@ -205,6 +224,9 @@
                                 @endforeach
                             </tbody>
                         </table>
+                        <div class="mx-10 my-10">
+                            {{ $allProducts->links('pagination::tailwind') }}
+                        </div>
                         @endif
                     </div>
                 </div>
