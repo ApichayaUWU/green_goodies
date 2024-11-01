@@ -1,5 +1,4 @@
 <?php
-
 namespace App\View\Components;
 
 use Illuminate\View\Component;
@@ -7,19 +6,22 @@ use Illuminate\View\Component;
 class ProductCard extends Component
 {
     public $product;
-    public $isHomePage; // Add this variable
+    public $isHomePage;
+    public $isWishlist; // Add this variable
 
     /**
      * Create a new component instance.
      *
      * @param  $product
      * @param  bool  $isHomePage
+     * @param  bool  $isWishlist
      * @return void
      */
-    public function __construct($product, $isHomePage = false)
+    public function __construct($product, $isHomePage = false, $isWishlist = false)
     {
         $this->product = $product;
-        $this->isHomePage = $isHomePage; // Initialize the isHomePage variable
+        $this->isHomePage = $isHomePage;
+        $this->isWishlist = $isWishlist; // Initialize the isWishlist variable
     }
 
     /**
@@ -31,7 +33,8 @@ class ProductCard extends Component
     {
         return view('components.product-card', [
             'product' => $this->product,
-            'isHomePage' => $this->isHomePage, // Pass the variable to the Blade view
+            'isHomePage' => $this->isHomePage,
+            'isWishlist' => $this->isWishlist, // Pass the variable to the Blade view
         ]);
     }
 }

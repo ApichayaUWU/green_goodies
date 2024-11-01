@@ -82,7 +82,7 @@
 
                         </div>
                     </form>
-                    <div class="mt-4"><x-heart-btn :productId="$product->id" /></div>
+                    <div class="mt-4"><x-heart-btn :productId="$product->id" :isWished="$product->isWished" /></div>
                 </div>
                 @else
                 <div class="bg-[#b95846] text-center w-[180px] rounded-[20px] my-10">

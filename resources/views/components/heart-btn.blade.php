@@ -1,4 +1,4 @@
-@props(['productId', 'isWished' => false])
+@props(['productId', 'isWished' ])
 
 <form action="{{ route('wishlist.toggle', $productId) }}" method="POST" id="wishlist-form-{{ $productId }}">
     @csrf <!-- CSRF token is needed for POST requests -->
@@ -37,22 +37,8 @@ function toggleWish(productId, currentWishedState) {
     heartEmpty.classList.toggle('hidden', newWishedState);
     heartFilled.classList.toggle('hidden', !newWishedState);
 
-    // Create a new hidden input to send the new state to the server
-    const hiddenInput = document.createElement('input');
-    hiddenInput.type = 'hidden';
-    hiddenInput.name = 'is_wished'; // Name your input appropriately
-    hiddenInput.value = newWishedState ? 'true' : 'false'; // Flip the wish status
-
-    // Remove any existing hidden input
-    const existingInput = form.querySelector('input[name="is_wished"]');
-    if (existingInput) {
-        form.removeChild(existingInput);
-    }
-
-    // Append the hidden input to the form
-    form.appendChild(hiddenInput);
-
-    // Submit the form to toggle the wishlist state on the server
+    // Submit the form to update wishlist on the server
     form.submit();
 }
+
 </script>
