@@ -19,8 +19,19 @@ class WishListController extends Controller
         $wishlistItems = Wishlist::where('user_id', auth()->id())
             ->with('product') // Eager load the product
             ->get();
+
+        $userId = Auth::id();
+        // Fetch wishlist items for the logged-in user
+        $wishlistProductIds = Wishlist::where('user_id', $userId)
+                                    ->pluck('product_id')
+                                    ->toArray();
+
+        // Add `isWished` attribute to each product
+        foreach ($wishlistItems as $item) {
+            $item->product->isWished = in_array($item->product->id, $wishlistProductIds);
+        }
         return view('wishlist.index', compact('wishlistItems'));
-        //return response()->json($wishlistItems);
+        // return response()->json($wishlistItems);
     }
 
     public function show()
@@ -29,6 +40,17 @@ class WishListController extends Controller
         $wishlistItems = Wishlist::where('user_id', auth()->id())
             ->with('product') // Eager load the product
             ->get();
+        
+        $userId = Auth::id();
+        // Fetch wishlist items for the logged-in user
+        $wishlistProductIds = Wishlist::where('user_id', $userId)
+                                    ->pluck('product_id')
+                                    ->toArray();
+
+        // Add `isWished` attribute to each product
+        foreach ($wishlistItems as $item) {
+            $item->product->isWished = in_array($item->product->id, $wishlistProductIds);
+        }
         return view('wishlist.index', compact('wishlistItems'));
     }
 

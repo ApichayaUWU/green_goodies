@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Product;
 use App\Models\ProductCategory;
+use App\Models\Wishlist;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
@@ -13,8 +14,21 @@ class ProductController extends Controller
     //For displaying all products to users
     public function show()
     {
+        $userId = Auth::id();
         $products = Product::paginate(10);
+
+        // Fetch wishlist items for the logged-in user
+        $wishlistProductIds = Wishlist::where('user_id', $userId)
+                                    ->pluck('product_id')
+                                    ->toArray();
+
+        // Add `isWished` attribute to each product
+        foreach ($products as $product) {
+            $product->isWished = in_array($product->id, $wishlistProductIds);
+        }
+
         return view('products.index', compact('products'));
+        //return response()->json($product);
     }
 
     public function showVegetable()
@@ -22,7 +36,19 @@ class ProductController extends Controller
         $products = DB::table('product_categories as pc')
         ->join('products as p', 'p.category_id', '=', 'pc.id')
         ->where('pc.id', 1)->paginate(10);
+
+        $userId = Auth::id();
+        // Fetch wishlist items for the logged-in user
+        $wishlistProductIds = Wishlist::where('user_id', $userId)
+                                    ->pluck('product_id')
+                                    ->toArray();
+
+        // Add `isWished` attribute to each product
+        foreach ($products as $product) {
+            $product->isWished = in_array($product->id, $wishlistProductIds);
+        }
         return view('products.vegetables', compact('products'));
+        // return response()->json($product);
     }
 
     public function showFruit()
@@ -30,6 +56,17 @@ class ProductController extends Controller
         $products = DB::table('product_categories as pc')
         ->join('products as p', 'p.category_id', '=', 'pc.id')
         ->where('pc.id', 2)->paginate(10);
+
+        $userId = Auth::id();
+        // Fetch wishlist items for the logged-in user
+        $wishlistProductIds = Wishlist::where('user_id', $userId)
+                                    ->pluck('product_id')
+                                    ->toArray();
+
+        // Add `isWished` attribute to each product
+        foreach ($products as $product) {
+            $product->isWished = in_array($product->id, $wishlistProductIds);
+        }
         return view('products.fruits', compact('products'));
     }
 
@@ -45,6 +82,17 @@ class ProductController extends Controller
 
         // Save the updated product
         $product->save();
+
+        // Check if the product is in the user's wishlist
+        $userId = Auth::id();
+        $isWished = Wishlist::where('user_id', $userId)
+                            ->where('product_id', $product->id)
+                            ->exists();
+
+        // Add the `isWished` attribute to the product
+        $product->isWished = $isWished;
+
+        
         return view('products.detail', compact('product'));
     }
 

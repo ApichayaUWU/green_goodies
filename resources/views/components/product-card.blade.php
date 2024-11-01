@@ -46,6 +46,7 @@
         @endif
         <h2 class="text-2xl font-semibold textColor truncate">
             {{ $product->name }}
+            
         </h2>
         <p class="text-lg py-2 textColor">
             ${{ number_format($product->price, 2) }}
@@ -53,7 +54,7 @@
     </div>
     @if($product->stock_quantity > 0)
     <div class="flex flex-row flex-wrap justify-center pb-5 justify-self-end">
-        <x-heart-btn :productId="$product->id" />
+        <x-heart-btn :productId="$product->id" :isWished="$product->isWished"/>
         <form action="{{ route('cart.add', $product->id) }}" method="POST">
             @csrf
             <div class="flex flex-row gap-4">
