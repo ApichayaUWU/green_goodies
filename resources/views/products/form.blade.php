@@ -204,7 +204,7 @@
                                     {{-- Actions --}}
                                     <td class="px-4 py-2 flex flex-col justify-center">
                                         {{-- Edit Button --}}
-                                        <button class="bg-[#E3EBC1] hover:bg-[#f7f9ee] text-center w-[100px] rounded-[40px] mb-2"
+                                        <button class="bg-[#E3EBC1] hover:bg-[#f7f9ee] transition-colors duration-[300ms] text-center w-[100px] rounded-[40px] mb-2"
                                             onclick="openEditModal({{ json_encode($product) }})">
                                             <p class="pt-4 text-l text-[#4C4343] p-2"><strong>Edit</strong></p>
                                         </button>
@@ -215,7 +215,7 @@
                                             @csrf
                                             @method('DELETE')
                                             <button type="submit"
-                                                class="bg-[#b95846] hover:bg-[#cf8d81] text-center w-[100px] rounded-[40px]"
+                                                class="bg-[#b95846] hover:bg-[#cf8d81] transition-colors duration-[300ms] text-center w-[100px] rounded-[40px]"
                                                 onclick="return confirm('Are you sure you want to delete this product?')">
                                                 <p class="pt-4 text-l text-white p-2"><strong>Delete</strong></p>
                                             </button>
