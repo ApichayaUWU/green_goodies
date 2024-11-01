@@ -163,8 +163,8 @@
             // Update the item's total price
             itemTotalPrices[index].innerText = `$${totalPrice.toFixed(2)}`;
 
-            // Update the quantity display
-            quantityDisplays[index].innerText = quantity;
+            // Sync hidden quantities with visible quantities
+            syncHiddenQuantities();
 
             // Update the grand total
             updateGrandTotal();
