@@ -30,7 +30,7 @@
                 <div class="p-6 text-gray-900">
                     {{-- Button to toggle form --}}
                     <button id="toggleFormButton"
-                        class="bg-[#53B637] text-center w-[250px] rounded-[40px] mt-3 mb-4 flex flex-row justify-center"
+                        class="bg-[#53B637] text-center w-[250px] transition-colors duration-[300ms] rounded-[40px] mt-3 mb-4 flex flex-row justify-center"
                         onclick="toggleForm()">
                         <span class="pt-5 text-xl text-white p-2"><strong>{{ isset($product) ? 'Edit Product' : 'Add New Product' }}</strong></span>
                         <svg id="toggleIcon" xmlns="http://www.w3.org/2000/svg"
@@ -119,7 +119,7 @@
                             {{-- Submit Button --}}
                             <div class="mt-6 ">
                                 <button type="submit"
-                                    class="bg-[#E3EBC1] hover:bg-[#f7f9ee] text-center w-[150px] rounded-[40px] mt-3 mb-4">
+                                    class="bg-[#E3EBC1] hover:bg-[#f7f9ee] transition-colors duration-[300ms] text-center w-[150px] rounded-[40px] mt-3 mb-4">
                                     <p class="pt-4 text-l text-[#4C4343] p-2">
                                     <strong>{{ isset($product) ? 'Update Product' : 'Add Product' }}</strong>
                                     </p>
@@ -304,7 +304,7 @@
 
                 <div class="mt-6">
                     <button type="submit"
-                        class="bg-[#E3EBC1] hover:bg-[#f7f9ee] text-center w-[150px] rounded-[40px] mt-3 mb-4">
+                        class="bg-[#E3EBC1] hover:bg-[#f7f9ee] transition-colors duration-[300ms] text-center w-[150px] rounded-[40px] mt-3 mb-4">
                         <p class="pt-4 text-l text-[#4C4343] p-2">
                                     <strong>Update Product</strong></p>
                     </button>
