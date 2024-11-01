@@ -15,6 +15,7 @@
         .textColorSelected {
             color: #53B637;
         }
+        
 
     </style>
     <div class="brownBg pt-6 pb-3 flex flex-row flex-wrap justify-center">
@@ -235,28 +236,28 @@
     </div>
 
     {{-- Modal for editing product --}}
-    <div id="editModal" class="fixed inset-0 overflow-scroll  flex items-center justify-center z-50 hidden">
-        <div class="bg-white rounded-lg shadow-lg w-11/12 md:w-1/2 p-6 ">
-            <h3 class="text-lg font-semibold text-gray-800">Edit Product</h3>
+    <div id="editModal" class="fixed inset-0 overflow-scroll flex items-center justify-center z-50 hidden ">
+        <div class="bg-white rounded-lg shadow-lg w-11/12 md:w-1/2 p-6 mt-32 ">
+            <h3 class="text-xl font-semibold  text-gray-800">Edit Product</h3>
             <form id="editForm" action="" method="POST" enctype="multipart/form-data">
                 @csrf
 
-                <div class="mb-4">
-                    <label for="edit_id" class="block text-sm font-medium text-gray-700">id</label>
+                <div class="mb-4 w-[300px]">
+                    <label for="edit_id" class="block text-lg font-medium text-gray-700">id</label>
                     <input type="number" name="id" id="edit_id"
                         class="block w-full px-4 py-2 mt-2 border-gray-300 rounded-md focus:ring focus:ring-indigo-300 focus:border-indigo-300"
                         required />
                 </div>
 
-                <div class="mb-4">
-                    <label for="edit_name" class="block text-sm font-medium text-gray-700">Product Name</label>
+                <div class="mb-4 w-[300px]">
+                    <label for="edit_name" class="block text-lg font-medium text-gray-700">Product Name</label>
                     <input type="text" name="name" id="edit_name"
                         class="block w-full px-4 py-2 mt-2 border-gray-300 rounded-md focus:ring focus:ring-indigo-300 focus:border-indigo-300"
                         required />
                 </div>
 
-                <div class="mb-4">
-                    <label for="edit_image" class="block text-sm font-medium text-gray-700">Product Image</label>
+                <div class="mb-4 w-[300px]">
+                    <label for="edit_image" class="block text-lg font-medium text-gray-700">Product Image</label>
                     <input type="file" name="image" id="edit_image"
                         class="block w-full px-4 py-2 mt-2 border-gray-300 rounded-md focus:ring focus:ring-indigo-300 focus:border-indigo-300"
                         accept="image/*" onchange="previewEditImage(event)" />
@@ -265,8 +266,8 @@
                     </div>
                 </div>
 
-                <div class="mb-4">
-                    <label for="edit_category_id" class="block text-sm font-medium text-gray-700">Category</label>
+                <div class="mb-4 w-[300px]">
+                    <label for="edit_category_id" class="block text-lg font-medium text-gray-700">Category</label>
                     <select name="category_id" id="edit_category_id"
                         class="block w-full px-4 py-2 mt-2 border-gray-300 rounded-md focus:ring focus:ring-indigo-300 focus:border-indigo-300"
                         required>
@@ -280,21 +281,21 @@
                 </div>
 
                 <div class="mb-4">
-                    <label for="edit_description" class="block text-sm font-medium text-gray-700">Description</label>
+                    <label for="edit_description" class="block text-lg font-medium text-gray-700">Description</label>
                     <textarea name="description" id="edit_description" rows="4"
                         class="block w-full px-4 py-2 mt-2 border-gray-300 rounded-md focus:ring focus:ring-indigo-300 focus:border-indigo-300"
                         required></textarea>
                 </div>
 
-                <div class="mb-4">
-                    <label for="edit_price" class="block text-sm font-medium text-gray-700">Price</label>
+                <div class="mb-4 w-[300px]">
+                    <label for="edit_price" class="block text-lg font-medium text-gray-700">Price</label>
                     <input type="number" name="price" id="edit_price" step="0.01"
                         class="block w-full px-4 py-2 mt-2 border-gray-300 rounded-md focus:ring focus:ring-indigo-300 focus:border-indigo-300"
                         required />
                 </div>
 
-                <div class="mb-4">
-                    <label for="edit_stock_quantity" class="block text-sm font-medium text-gray-700">Stock
+                <div class="mb-4 w-[300px]">
+                    <label for="edit_stock_quantity" class="block text-lg font-medium text-gray-700">Stock
                         Quantity</label>
                     <input type="number" name="stock_quantity" id="edit_stock_quantity"
                         class="block w-full px-4 py-2 mt-2 border-gray-300 rounded-md focus:ring focus:ring-indigo-300 focus:border-indigo-300"
@@ -303,12 +304,13 @@
 
                 <div class="mt-6">
                     <button type="submit"
-                        class="px-6 py-2 text-white bg-indigo-600 rounded-md hover:bg-indigo-700 focus:ring focus:ring-indigo-300 focus:border-indigo-300">
-                        Update Product
+                        class="bg-[#E3EBC1] hover:bg-[#f7f9ee] text-center w-[150px] rounded-[40px] mt-3 mb-4">
+                        <p class="pt-4 text-l text-[#4C4343] p-2">
+                                    <strong>Update Product</strong></p>
                     </button>
                 </div>
             </form>
-            <button class="absolute top-0 right-0 p-2" onclick="closeModal()">
+            <button class="absolute top-0 right-[420px] p-2" onclick="closeModal()">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
                     stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
