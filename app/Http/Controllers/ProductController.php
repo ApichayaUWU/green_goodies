@@ -35,7 +35,7 @@ class ProductController extends Controller
     {
         $products = DB::table('product_categories as pc')
         ->join('products as p', 'p.category_id', '=', 'pc.id')
-        ->where('pc.id', 1)->paginate(10);
+        ->where('pc.id', 1)->paginate(12);
 
         $userId = Auth::id();
         // Fetch wishlist items for the logged-in user
@@ -55,7 +55,7 @@ class ProductController extends Controller
     {
         $products = DB::table('product_categories as pc')
         ->join('products as p', 'p.category_id', '=', 'pc.id')
-        ->where('pc.id', 2)->paginate(10);
+        ->where('pc.id', 2)->paginate(12);
 
         $userId = Auth::id();
         // Fetch wishlist items for the logged-in user
@@ -71,7 +71,7 @@ class ProductController extends Controller
     }
 
     public function search($searchTerm){
-        $products = Product::where('name', 'like', '%' . $searchTerm)->paginate(10);
+        $products = Product::where('name', 'like', '%' . $searchTerm)->paginate(12);
         return view('products.index', compact('products'));
     }
 
